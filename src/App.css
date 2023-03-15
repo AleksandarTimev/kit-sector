@@ -13,6 +13,11 @@
   }
 }
 
+.logo {
+  max-width: 30px;
+  height: auto;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -35,4 +40,29 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* body {
+  background-image: url("https://img.freepik.com/free-vector/white-abstract-background-design_361591-1242.jpg?w=2000");
+  background-size: cover;
+  background-position: center;
+} */
+
+.container-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #98a2ac;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.container-form form {
+  width: 100%;
+  max-width: 400px;
 }

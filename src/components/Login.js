@@ -1,35 +1,43 @@
-import React, { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import React, { useState, useEffect } from "react";
 import { Navbar } from "./Navigation";
+import { auth } from "../firebase.js";
 
 export const LoginForm = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // perform login logic here using username and password
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      alert('User logged-in successfully!');
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (
     <div>
     <Navbar />
-    <form onSubmit={handleSubmit}>
+    <form className="container-form" onSubmit={handleSubmit} >
       <div className="form-group">
-        <label htmlFor="username">Username</label>
+        <label htmlFor="email">Email</label>
         <input
           type="text"
           className="form-control"
-          id="username"
-          value={username}
-          onChange={handleUsernameChange}
+          id="email"
+          value={email}
+          onChange={handleEmailChange}
           required
         />
       </div>
