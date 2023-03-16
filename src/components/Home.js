@@ -4,7 +4,7 @@ import { Products } from "./Products.js";
 
 export const Home = () => {
   return (
-    <div>
+    <div className="wrapper">
       <Navbar />
       <Products />
     </div>

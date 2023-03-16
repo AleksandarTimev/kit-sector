@@ -49,6 +49,9 @@ export const LoginForm = () => {
       <button type="submit" className="btn btn-primary">
         Login
       </button>
+      <p className="mt-3 text-center">
+          Don't have an account yet? <a href="/register">Register</a>
+        </p>
     </form>
     </div>
   );

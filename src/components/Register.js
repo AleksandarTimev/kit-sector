@@ -77,6 +77,9 @@ export const RegisterForm = () => {
         <button type="submit" className="btn btn-primary">
           Register
         </button>
+        <p className="mt-3 text-center">
+          Already have an account? <a href="/login">Login</a>
+        </p>
       </form>
     </div>
   );
