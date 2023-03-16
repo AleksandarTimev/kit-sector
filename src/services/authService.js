@@ -4,6 +4,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth } from "../firebase.js";
+import { redirect } from "react-router-dom";
 
 export const register = async (email, password, confirmPassword, gender) => {
   if (password !== confirmPassword) {
@@ -21,6 +22,7 @@ export const register = async (email, password, confirmPassword, gender) => {
     // User has been registered successfully
     alert("User registered successfully!");
     console.log(user);
+    return redirect("/");
   } catch (error) {
     alert(error.message);
   }
@@ -31,6 +33,7 @@ export const login = async (email, password) => {
     const user = await signInWithEmailAndPassword(auth, email, password);
     alert("User logged-in successfully!");
     console.log(user);
+    return redirect("/");
   } catch (error) {
     alert(error.message);
   }

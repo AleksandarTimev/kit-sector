@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Navbar } from "./Navigation";
 import { login } from "../services/authService.js";
+import { Link } from "react-router-dom";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -50,7 +51,7 @@ export const LoginForm = () => {
         Login
       </button>
       <p className="mt-3 text-center">
-          Don't have an account yet? <a href="/register">Register</a>
+          Don't have an account yet? <Link to="/register">Register</Link>
         </p>
     </form>
     </div>
