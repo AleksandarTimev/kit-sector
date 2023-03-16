@@ -4,7 +4,6 @@ import { Navbar } from "./Navigation.js";
 export const Contacts = () => {
   return (
     <div>
-      <Navbar />
         <h1 className="contact-us">Contact Us</h1>
       <div className="container">
         <div className="wrapper-contacts">
