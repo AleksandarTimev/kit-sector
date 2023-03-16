@@ -74,7 +74,7 @@ export const RegisterForm = () => {
             <option value="other">Other</option>
           </select>
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary register">
           Register
         </button>
         <p className="mt-3 text-center">

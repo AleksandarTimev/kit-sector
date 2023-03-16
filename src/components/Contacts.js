@@ -1,5 +1,4 @@
 import React from "react";
-import { Navbar } from "./Navigation.js";
 
 export const Contacts = () => {
   return (

@@ -1,24 +1,67 @@
 .navbar-nav li:hover {
-    background-color: #f8f8f8;
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+
+.navbar-nav li:hover a {
+  color: #61dafb;
+}
+
+.log-out {
+  color: #0c0b0b;
+  background-color: #e86e6e;
+  border-color: #ef5959;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 5px;
+}
+
+.log-out:hover {
+  color: #ef5959;
+  background-color: transparent;
+  border-color: #ef5959;
+}
+
+.logo {
+  max-height: 50px;
+  margin-right: 10px;
+  margin-left: 5px;
+}
+
+/* additional animations */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
   }
-  
-  .navbar-nav li:hover a {
-    color: #61dafb;
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
   }
-  
-  .log-out {
-    color: #0c0b0b;
-    background-color: #e86e6e;
-    border-color: #ef5959;
-    transition: all 0.3s ease;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
   }
-  
-  .log-out:hover {
-    color: #ef5959;
-    background-color: transparent;
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
   }
-  
-  .logo {
-    max-height: 50px;
-    margin-right: 10px;
-  }
+}
+
+.animated.slideInLeft {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-name: slideInLeft;
+}
+
+.animated.slideInRight {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-name: slideInRight;
+}

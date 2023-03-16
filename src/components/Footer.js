@@ -5,7 +5,7 @@ export const Footer = () => {
   return (
     <footer className="footer">
       <div className="container">
-        <p>&copy; 2023 Kit Sector</p>
+        <p>All Rights Reserved 2023 Kit Sector&copy;</p>
       </div>
     </footer>
   );

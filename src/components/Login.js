@@ -46,7 +46,7 @@ export const LoginForm = () => {
           required
         />
       </div>
-      <button type="submit" className="btn btn-primary">
+      <button type="submit" className="btn btn-primary login">
         Login
       </button>
       <p className="mt-3 text-center">
