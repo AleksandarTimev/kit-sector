@@ -1,0 +1,24 @@
+.navbar-nav li:hover {
+    background-color: #f8f8f8;
+  }
+  
+  .navbar-nav li:hover a {
+    color: #61dafb;
+  }
+  
+  .log-out {
+    color: #0c0b0b;
+    background-color: #e86e6e;
+    border-color: #ef5959;
+    transition: all 0.3s ease;
+  }
+  
+  .log-out:hover {
+    color: #ef5959;
+    background-color: transparent;
+  }
+  
+  .logo {
+    max-height: 50px;
+    margin-right: 10px;
+  }

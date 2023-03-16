@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Navbar } from "./Navigation";
 import { login } from "../services/authService.js";
 import { Link } from "react-router-dom";
 
@@ -23,7 +22,6 @@ export const LoginForm = () => {
 
   return (
     <div>
-    <Navbar />
     <form className="container-form" onSubmit={handleSubmit} >
     <h1>Login</h1>
       <div className="form-group">

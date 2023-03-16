@@ -3,6 +3,7 @@ import { logout } from "../services/authService.js";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase.js";
 import { Link } from 'react-router-dom';
+import "../public/css/Navigation.css"
 
 export const Navbar = () => {
   const [user, setUser] = useState(null);
@@ -56,7 +57,7 @@ export const Navbar = () => {
                 <Link className="nav-link" to="/login">Login</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/register">Register</Link>
+                <Link className="nav-link" to="/register ">Register</Link>
               </li>
             </ul>
           )}

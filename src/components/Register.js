@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Navbar } from "./Navigation";
 import { register } from "../services/authService.js"
 import { Link } from "react-router-dom";
 
@@ -17,7 +16,6 @@ export const RegisterForm = () => {
 
   return (
     <div>
-      <Navbar />
       <form onSubmit={handleSubmit} className="container-form">
       <h1>Register</h1>
         <div className="form-group">
