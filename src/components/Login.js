@@ -25,6 +25,7 @@ export const LoginForm = () => {
     <div>
     <Navbar />
     <form className="container-form" onSubmit={handleSubmit} >
+    <h1>Login</h1>
       <div className="form-group">
         <label htmlFor="email">Email</label>
         <input
