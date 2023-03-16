@@ -1,7 +1,6 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Navbar } from "./Navigation";
-import { auth } from "../firebase.js";
+import { login } from "../services/authService.js";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -18,13 +17,8 @@ export const LoginForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      alert('User logged-in successfully!');
-    } catch (error) {
-      alert(error.message);
-    }
-  };
+    await login(email, password)
+  }
 
   return (
     <div>
