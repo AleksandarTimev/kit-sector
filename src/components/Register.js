@@ -17,7 +17,9 @@ export const RegisterForm = () => {
   return (
     <div>
       <form onSubmit={handleSubmit} className="container-form">
-      <h1>Register</h1>
+      <div className="heading-one">
+        <h1>Register</h1>
+      </div>
         <div className="form-group">
           <label className="navbar-nav ml-auto" htmlFor="username">
             Email
