@@ -6,6 +6,7 @@ import { RegisterForm } from "./components/Register.js";
 import { Contacts } from "./components/Contacts";
 import { Footer } from "./components/Footer.js";
 import { Navbar } from "./components/Navigation.js"
+import { Upload } from "./components/Upload.js"
 import "./App.css";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/contact" element={<Contacts />} />
+          <Route path="/upload" element={<Upload />} />
         </Routes>
       <Footer />
     </div>

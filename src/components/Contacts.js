@@ -3,6 +3,7 @@ import "../public/css/Contacts.css"
 
 export const Contacts = () => {
   return (
+    <div className='container'>
     <div>
         <h1 className="contact-us">Contact Us</h1>
       <div className="container">
@@ -29,6 +30,7 @@ export const Contacts = () => {
           <p> We are a team of aspiring young professionals that know the value and joy our football shirts convey. This is why we are motivated to extend their life in an attempt to give that joy and happiness to other people as well!</p>
         </div>
       </div>
+    </div>
     </div>
     </div>
   );
