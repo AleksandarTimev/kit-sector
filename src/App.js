@@ -7,7 +7,7 @@ import { RegisterForm } from "./components/Register.js";
 import { Contacts } from "./components/Contacts";
 import { Footer } from "./components/Footer.js";
 import { Navbar } from "./components/Navigation.js"
-import { Upload } from "./components/Upload.js"
+import { UploadForm } from "./components/Upload.js"
 import { Catalog }from "./components/Catalog";
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/contact" element={<Contacts />} />
-          <Route path="/upload" element={<Upload />} />
+          <Route path="/upload" element={<UploadForm />} />
           <Route path="/catalog" element={<Catalog />} />
         </Routes>
       <Footer />
