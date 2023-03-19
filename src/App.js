@@ -1,3 +1,4 @@
+import "./App.css";
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { Home } from "./components/Home";
@@ -7,7 +8,7 @@ import { Contacts } from "./components/Contacts";
 import { Footer } from "./components/Footer.js";
 import { Navbar } from "./components/Navigation.js"
 import { Upload } from "./components/Upload.js"
-import "./App.css";
+import { Catalog }from "./components/Catalog";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/contact" element={<Contacts />} />
           <Route path="/upload" element={<Upload />} />
+          <Route path="/catalog" element={<Catalog />} />
         </Routes>
       <Footer />
     </div>
