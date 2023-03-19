@@ -1,33 +1,52 @@
-// import { useState, useEffect } from "react";
-// import { db } from "../firebase.js"
-// import { getDocs, collection } from "firebase/firestore";
- 
+import React, { useEffect, useState } from "react";
+import { kitService } from "../services/kitService.js";
 
 export const Catalog = () => {
-  // const [shirtList, setShirtList] = useState([]);
+  const [kits, setKits] = useState([]);
 
-  // const shirtCollectionRef = collection(db, "shirts");
-  
-  // useEffect(()=> {
-  //   const getShirtList = async () => {
-  //       try{
-  //           const data = await getDocs(shirtCollectionRef);
-  //           const filteredData = data.docs.map((shirt) => ({
-  //                ...shirt.data(),
-  //                id: shirt.id,
-  //                name: shirt.name}))
-  //           console.log(filteredData);
-  //       } catch(err){
-  //           console.error(err);
-  //       }
-  //   };
+  useEffect(() => {
+    kitService.getKits().then((data) => setKits(data));
+  }, []);
 
-  //   getShirtList()
-  // }, []);
+  const handleDeleteKit = async (kitId) => {
+    await kitService.deleteKit(kitId);
+    setKits((prevKits) => prevKits.filter((kit) => kit.id !== kitId));
+  };
 
   return (
-    <div>catalog</div>
-    );
+    <div className="container">
+      <h1>Catalog</h1>
+      <ul>
+        {kits.map((kit) => (
+          <li key={kit.id}>
+            <div className="row">
+              <div className="col-6">
+                <h4>{kit.name}</h4>
+                <p>{kit.description}</p>
+                <p>Price: {kit.price}</p>
+                <p>Condition: {kit.condition}</p>
+              </div>
+              <div className="col-6">
+                <img src={kit.image} alt={kit.name} width="100" height="100" />
+                <div className="d-flex">
+                  <button
+                    type="button"
+                    className="btn btn-secondary mx-2"
+                    onClick={() => handleDeleteKit(kit.id)}
+                  >
+                    Delete
+                  </button>
+                  <button type="button" className="btn btn-primary mx-2">
+                    Edit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default Catalog;

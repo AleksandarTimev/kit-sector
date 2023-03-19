@@ -1,9 +1,16 @@
-import { storage, db, auth } from "../firebase";
+import { storage, db, auth } from "../firebase.js";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 // import { useState } from 'react';
 
 export const kitService = {
+ getKits: async () => {
+    const kitsRef = collection(db, "shirts");
+    const snapshot = await getDocs(kitsRef);
+    const kits = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data()}));
+    return kits;
+ },
+
   handleNameChange: (event, setName) => {
     setName(event.target.value);
   },

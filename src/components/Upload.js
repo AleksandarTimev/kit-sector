@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { kitService } from "../services/kitService";
+import { kitService } from "../services/kitService.js";
 
 export const UploadForm = () => {
   const [name, setName] = useState("");
