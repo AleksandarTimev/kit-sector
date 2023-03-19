@@ -2,8 +2,12 @@ import React from "react";
 
 export const Home = () => {
   return (
-    <div className="wrapper-home">
-    test
-    </div>
+<section class="hero">
+  <div class="hero-content">
+    <h1>Welcome to Kit Sector</h1>
+    <p>Discover our wide range of football kits and extend their life!</p>
+    <a href="/catalog" class="btn">Explore Now</a>
+  </div>
+</section>
   )
 };
