@@ -23,7 +23,7 @@ export const UploadForm = () => {
       className="container-form"
     >
       <div className="heading-one">
-        <h1>Upload</h1>
+        <h1 className="h-one">Upload</h1>
       </div>
       <div className="form-group">
         <label className="navbar-nav ml-auto" htmlFor="name">
@@ -33,6 +33,7 @@ export const UploadForm = () => {
           type="text"
           id="name"
           className="form-control"
+          placeholder="Real Madrid Home 19/20"
           value={name}
           onChange={(event) => kitService.handleNameChange(event, setName)}
           required
@@ -46,6 +47,7 @@ export const UploadForm = () => {
           type="text"
           id="description"
           className="form-control"
+          placeholder="Description here..."
           value={description}
           onChange={(event) =>
             kitService.handleDescriptionChange(event, setDescription)
@@ -61,6 +63,7 @@ export const UploadForm = () => {
           type="number"
           id="price"
           className="form-control"
+          placeholder="Set a price"
           value={price}
           onChange={(event) => kitService.handlePriceChange(event, setPrice)}
           required
@@ -78,8 +81,8 @@ export const UploadForm = () => {
           required
         >
           <option value="">Select Condition</option>
-          <option value="new">New</option>
-          <option value="old">Old</option>
+          <option value="New">New</option>
+          <option value="Old">Old</option>
         </select>
       </div>
       <div className="form-group">

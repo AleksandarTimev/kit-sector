@@ -1,15 +1,43 @@
 import { storage, db, auth } from "../firebase.js";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 // import { useState } from 'react';
 
 export const kitService = {
- getKits: async () => {
+  getKits: async () => {
     const kitsRef = collection(db, "shirts");
     const snapshot = await getDocs(kitsRef);
-    const kits = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data()}));
+    const kits = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     return kits;
- },
+  },
+
+  handleDeleteKit: async (id) => {
+    try {
+      const kit = doc(db, "shirts", id);
+      await deleteDoc(kit);
+      alert("Kit deleted successfully!");
+    } catch (err) {
+      console.log(err)
+      alert("Could not delete kit!");
+    }
+  },
+
+  handleEditKit: async (id) => {
+    try {
+      const kit = doc(db, "shirts", id);
+      await deleteDoc(kit);
+      alert("Kit deleted successfully!");
+    } catch (err) {
+      console.log(err)
+      alert("Could not delete kit!");
+    }
+  },
 
   handleNameChange: (event, setName) => {
     setName(event.target.value);
@@ -52,5 +80,5 @@ export const kitService = {
       alert("You are not logged-in!");
       console.log(err);
     }
-  }
+  },
 };

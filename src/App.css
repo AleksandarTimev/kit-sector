@@ -47,3 +47,13 @@
   background-color: #000;
   color: #fff;
 }
+
+.h-one {
+  display: grid;
+  margin-top: 20px;
+  margin-bottom: 20px; /* add some margin at the bottom */
+  font-size: 36px; /* adjust font size as needed */
+  font-weight: bold; /* add font weight for emphasis */
+  color: #000000; /* set font color */
+  text-align: center;
+}
