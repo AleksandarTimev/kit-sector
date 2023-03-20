@@ -1,14 +1,16 @@
 import { storage, db, auth } from "../firebase.js";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import {
   collection,
   addDoc,
   getDocs,
+  getDoc,
   deleteDoc,
   doc,
-  updateDoc
+  // updateDoc
 } from "firebase/firestore";
+import { useState } from "react"
 
 export const kitService = {
 
@@ -18,6 +20,27 @@ export const kitService = {
     const kits = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     return kits;
   },
+
+getKitById: async (id) => {
+  try {
+    const kitDoc = doc(db, "shirts", id);
+    const kitSnap = await getDoc(kitDoc);
+    if (kitSnap.exists()) {
+      const kitData = kitSnap.data();
+      console.log("kitData:", kitData);
+      const storageRef = ref(storage);
+      const imageRef = storageRef.child(kitData.imageRef);
+      const imageUrl = await getDownloadURL(imageRef);
+      console.log("imageUrl:", imageUrl);
+      return { id: kitSnap.id, ...kitData, imageUrl };
+    } else {
+      throw new Error("Kit not found.");
+    }
+  } catch (err) {
+    console.log(err);
+    alert("Could not retrieve kit.");
+  }
+},
 
   handleDeleteKit: async (id) => {
     try {
@@ -30,10 +53,19 @@ export const kitService = {
     }
   },
 
-  // handleEditKit: async (id) => {
-  //   const history = useHistory();
-  //   history.push(`/edit/${id}`);
-  // },
+  useEditKit: () => {
+    const [kitId, setKitId] = useState(null);
+    const navigate = useNavigate();
+    const handleEditKit = (id) => {
+      setKitId(id);
+      navigate(`/edit/${id}`);
+    };
+    
+    return {
+      kitId,
+      handleEditKit,
+    };
+  },
 
   handleNameChange: (event, setName) => {
     setName(event.target.value);

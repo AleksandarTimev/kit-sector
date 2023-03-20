@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase.js";
 import { kitService } from "../services/kitService.js";
 import "../public/css/Catalog.css"
@@ -6,6 +7,7 @@ import "../public/css/Catalog.css"
 export const Catalog = () => {
   const [kits, setKits] = useState([]);
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     kitService.getKits().then((data) => setKits(data));
@@ -20,6 +22,10 @@ export const Catalog = () => {
       authListener();
     };
   }, []);
+
+  const handleEditKit = (id) => {
+    navigate(`/edit/${id}`);
+  };
 
   return (
     <div className="container">
@@ -56,7 +62,7 @@ export const Catalog = () => {
                     <button
                       type="button"
                       className="btn btn-primary mx-2"
-                      onClick={() => kitService.handleEditKit(kit.id)}
+                      onClick={() => handleEditKit(kit.id)}
                     >
                       Edit
                     </button>
