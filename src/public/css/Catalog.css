@@ -1,0 +1,40 @@
+.container {
+    margin-top: 30px;
+  }
+  
+  .h-one {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .li-catalog {
+    list-style: none;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .col-6 {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+  
+  .col-3 {
+    flex-basis: 25%;
+    max-width: 25%;
+  }
+  
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .btn {
+    margin-top: 10px;
+  }

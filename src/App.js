@@ -8,7 +8,7 @@ import { Contacts } from "./components/Contacts";
 import { Footer } from "./components/Footer.js";
 import { Navbar } from "./components/Navigation.js"
 import { UploadForm } from "./components/Upload.js"
-import { Catalog }from "./components/Catalog";
+import { Catalog } from "./components/Catalog";
 
 function App() {
 
