@@ -27,7 +27,7 @@ export const Contacts = () => {
         </div>
         <div className="about-us">
             <h3>Our Mission</h3>
-          <p> We are a team of aspiring young professionals that know the value and joy our football shirts convey. This is why we are motivated to extend their life in an attempt to give that joy and happiness to other people as well!</p>
+          <p> We are a team of aspiring young professionals that know the value and joy our football kits convey. This is why we are motivated to extend their life in an attempt to give that joy and happiness to other people as well!</p>
         </div>
       </div>
     </div>

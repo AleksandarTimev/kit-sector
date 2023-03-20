@@ -49,6 +49,7 @@ export const kitService = {
       });
       alert("Uploaded successfully!");
     } catch (err) {
+      alert("You are not logged-in!");
       console.log(err);
     }
   }
