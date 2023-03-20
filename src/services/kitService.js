@@ -1,4 +1,5 @@
 import { storage, db, auth } from "../firebase.js";
+import { useHistory } from "react-router-dom";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import {
   collection,
@@ -6,10 +7,11 @@ import {
   getDocs,
   deleteDoc,
   doc,
+  updateDoc
 } from "firebase/firestore";
-// import { useState } from 'react';
 
 export const kitService = {
+
   getKits: async () => {
     const kitsRef = collection(db, "shirts");
     const snapshot = await getDocs(kitsRef);
@@ -28,16 +30,10 @@ export const kitService = {
     }
   },
 
-  handleEditKit: async (id) => {
-    try {
-      const kit = doc(db, "shirts", id);
-      await deleteDoc(kit);
-      alert("Kit deleted successfully!");
-    } catch (err) {
-      console.log(err)
-      alert("Could not delete kit!");
-    }
-  },
+  // handleEditKit: async (id) => {
+  //   const history = useHistory();
+  //   history.push(`/edit/${id}`);
+  // },
 
   handleNameChange: (event, setName) => {
     setName(event.target.value);

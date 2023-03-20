@@ -9,6 +9,7 @@ import { Footer } from "./components/Footer.js";
 import { Navbar } from "./components/Navigation.js"
 import { UploadForm } from "./components/Upload.js"
 import { Catalog } from "./components/Catalog";
+import { EditForm } from "./components/Edit";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/contact" element={<Contacts />} />
           <Route path="/upload" element={<UploadForm />} />
           <Route path="/catalog" element={<Catalog />} />
+          <Route path="/edit/:id" element={<EditForm />} />
         </Routes>
       <Footer />
     </div>
