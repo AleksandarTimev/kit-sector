@@ -10,7 +10,9 @@ import {
   doc,
   // updateDoc
 } from "firebase/firestore";
-import { useState } from "react"
+import { useState } from "react";
+
+ // initialize the storage reference
 
 export const kitService = {
 
@@ -28,9 +30,8 @@ getKitById: async (id) => {
     if (kitSnap.exists()) {
       const kitData = kitSnap.data();
       console.log("kitData:", kitData);
-      const storageRef = ref(storage);
-      const imageRef = storageRef.child(kitData.imageRef);
-      const imageUrl = await getDownloadURL(imageRef);
+      const storageRef = ref(storage, kitData.imageUrl);
+      const imageUrl = await getDownloadURL(storageRef);
       console.log("imageUrl:", imageUrl);
       return { id: kitSnap.id, ...kitData, imageUrl };
     } else {
