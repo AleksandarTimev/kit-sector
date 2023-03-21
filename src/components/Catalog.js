@@ -50,7 +50,7 @@ export const Catalog = () => {
                 />
               </div>
               <div className="d-flex justify-content-center">
-                {user ? (
+                {user && user.uid === kit.userId ? (
                   <>
                     <button
                       type="button"

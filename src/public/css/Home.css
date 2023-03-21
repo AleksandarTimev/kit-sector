@@ -22,3 +22,13 @@
   font-size: 1.5rem;
   margin-bottom: 2rem;
 }
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.logo {
+  max-width: 30px;
+  height: auto;
+}

@@ -17,10 +17,11 @@ import { useState } from "react";
 
 export const kitService = {
 
-  getKits: async () => {
+getKits: async () => {
     const kitsRef = collection(db, "shirts");
     const snapshot = await getDocs(kitsRef);
     const kits = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    console.log(kits)
     return kits;
   },
 
