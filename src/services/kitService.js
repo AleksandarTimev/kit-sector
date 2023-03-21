@@ -6,6 +6,7 @@ import {
   addDoc,
   getDocs,
   getDoc,
+  setDoc,
   deleteDoc,
   doc,
   // updateDoc
@@ -29,10 +30,8 @@ getKitById: async (id) => {
     const kitSnap = await getDoc(kitDoc);
     if (kitSnap.exists()) {
       const kitData = kitSnap.data();
-      console.log("kitData:", kitData);
       const storageRef = ref(storage, kitData.imageUrl);
       const imageUrl = await getDownloadURL(storageRef);
-      console.log("imageUrl:", imageUrl);
       return { id: kitSnap.id, ...kitData, imageUrl };
     } else {
       throw new Error("Kit not found.");
@@ -40,6 +39,35 @@ getKitById: async (id) => {
   } catch (err) {
     console.log(err);
     alert("Could not retrieve kit.");
+  }
+},
+
+handleEditSubmit: async (event, id, name, description, price, condition, image) => {
+  event.preventDefault();
+  try {
+    const kitRef = doc(db, "shirts", id);
+    const kit = await getDoc(kitRef);
+    const kitData = kit.data();
+    let imageUrl = kitData.imageUrl;
+
+    if (image !== null) {
+      const storageRef = ref(storage, imageUrl);
+      await uploadBytes(storageRef, image);
+      imageUrl = imageUrl + `?v=${new Date().getTime()}`;
+    }
+
+    await setDoc(kitRef, {
+      name: name,
+      description: description,
+      price: Number(price),
+      condition: condition,
+      imageUrl: imageUrl,
+    });
+
+    alert("Kit updated successfully!");
+  } catch (err) {
+    console.log(err);
+    alert("Could not update kit.");
   }
 },
 
