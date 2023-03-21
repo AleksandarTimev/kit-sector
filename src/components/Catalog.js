@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase.js";
 import { kitService } from "../services/kitService.js";
-import "../public/css/Catalog.css"
+import "../public/css/Catalog.css";
 
 export const Catalog = () => {
   const [kits, setKits] = useState([]);
@@ -29,52 +29,39 @@ export const Catalog = () => {
 
   return (
     <div className="container">
-    <h1 className="h-one">Catalog</h1>
-    <ul>
-      {kits.map((kit) => (
-        <li className= "li-catalog" key={kit.id}>
-          <div className="row">
-            <div className="col-6">
+      <h1 className="h-one">Catalog</h1>
+      <ul className="kits-grid">
+        {kits.map((kit) => (
+          <li className="li-catalog" key={kit.id}>
+            <div>
               <h4>{kit.name}</h4>
+              <img src={kit.imageUrl} alt={kit.name} />
               <p>Price: ${kit.price}</p>
               <p>Condition: {kit.condition}</p>
               <p>Description: {kit.description}</p>
             </div>
-            <div className="col-3 d-flex flex-column justify-content-between align-items-center">
-              <div>
-                <img
-                  src={kit.imageUrl}
-                  alt={kit.name}
-                  width="100"
-                  height="100"
-                />
+            {user && user.uid === kit.userId ? (
+              <div className="kit-buttons">
+                <button
+                  type="button"
+                  className="btn btn-secondary mx-2"
+                  onClick={() => kitService.handleDeleteKit(kit.id)}
+                >
+                  Delete
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => handleEditKit(kit.id)}
+                >
+                  Edit
+                </button>
               </div>
-              <div className="d-flex justify-content-center">
-                {user && user.uid === kit.userId ? (
-                  <>
-                    <button
-                      type="button"
-                      className="btn btn-secondary mx-2"
-                      onClick={() => kitService.handleDeleteKit(kit.id)}
-                    >
-                      Delete
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-primary mx-2"
-                      onClick={() => handleEditKit(kit.id)}
-                    >
-                      Edit
-                    </button>
-                  </>
-                ) : null}
-              </div>
-            </div>
-          </div>
-        </li>
-      ))}
-    </ul>
-  </div>
+            ) : null}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 

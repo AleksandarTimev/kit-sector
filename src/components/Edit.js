@@ -107,6 +107,7 @@ export const EditForm = () => {
           id="image"
           className="form-control"
           onChange={(event) => kitService.handleImageChange(event, setImage)}
+          required
         />
       </div>
       <button type="submit" className="btn btn-primary register">

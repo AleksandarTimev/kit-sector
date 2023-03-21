@@ -64,7 +64,7 @@ export const Navbar = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <button onClick={logout} className="log-out form-control">
+                  <button onClick={logout} className="log-out">
                     Log Out
                   </button>
                 </li>
