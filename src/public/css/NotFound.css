@@ -17,3 +17,13 @@
     font-size: 1.5rem;
     margin-bottom: 1rem;
   }
+
+  .hero {
+    background-image: url('https://img.freepik.com/free-vector/white-gold-geometric-pattern-background-vector_53876-140726.jpg?w=1380&t=st=1679260580~exp=1679261180~hmac=e302e640920be6aff74e2a40c5f6512c845519845e718e10bc1e2c7a33fd409b');
+    background-size: cover;
+    background-position: center;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
