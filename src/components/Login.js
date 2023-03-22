@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { login } from "../services/authService.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -18,6 +19,7 @@ export const LoginForm = () => {
     event.preventDefault();
 
     await login(email, password)
+    navigate('/');
   }
 
   return (

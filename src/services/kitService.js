@@ -25,6 +25,11 @@ getKits: async () => {
     return kits;
   },
 
+ handleDetailsKit: (id, navigate) => {
+    console.log(id)
+    navigate(`/details/${id}`)
+  },
+
 getKitById: async (id) => {
   try {
     const kitDoc = doc(db, "shirts", id);
@@ -43,7 +48,7 @@ getKitById: async (id) => {
   }
 },
 
-handleEditSubmit: async (event, id, name, description, price, condition, image) => {
+handleEditSubmit: async (event, id, name, description, price, condition, image, navigate) => {
   event.preventDefault();
   try {
     const kitRef = doc(db, "shirts", id);
@@ -64,8 +69,8 @@ handleEditSubmit: async (event, id, name, description, price, condition, image) 
       condition: condition,
       imageUrl: imageUrl,
     });
-
     alert("Kit updated successfully!");
+    navigate(`/details/${kit.id}`)
   } catch (err) {
     console.log(err);
     alert("Could not update kit.");
@@ -117,7 +122,7 @@ handleEditSubmit: async (event, id, name, description, price, condition, image) 
     setImage(event.target.files[0]);
   },
 
-  handleSubmit: async (event, name, description, price, condition, image) => {
+  handleSubmit: async (event, name, description, price, condition, image, navigate) => {
     event.preventDefault();
     if (!image) return;
     try {
@@ -134,6 +139,7 @@ handleEditSubmit: async (event, id, name, description, price, condition, image) 
         userId: auth?.currentUser?.uid,
       });
       alert("Uploaded successfully!");
+      navigate('/catalog');
     } catch (err) {
       alert("You are not logged-in!");
       console.log(err);

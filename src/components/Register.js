@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import { register } from "../services/authService.js"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [gender, setGender] = useState("");
+  
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     await register(email, password, confirmPassword, gender)
+    navigate('/');
   };
 
   return (

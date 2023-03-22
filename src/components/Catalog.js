@@ -23,10 +23,6 @@ export const Catalog = () => {
     };
   }, []);
 
-  const handleDetailsKit = (id) => {
-    navigate(`/details/${id}`);
-  };
-
   return (
     <div className="container">
       <h1 className="h-one">Catalog</h1>
@@ -36,16 +32,13 @@ export const Catalog = () => {
             <div>
               <h4>{kit.name}</h4>
               <img src={kit.imageUrl} alt={kit.name} />
-              {/* <p>Price: ${kit.price}</p>
-              <p>Condition: {kit.condition}</p>
-              <p>Description: {kit.description}</p> */}
             </div>
             {user ? (
               <div className="kit-buttons">
                 <button
                   type="button"
                   className="btn btn-secondary mx-2"
-                  onClick={() => handleDetailsKit(kit.id)}
+                  onClick={() => kitService.handleDetailsKit(kit.id, navigate)}
                 >
                   Details
                 </button>

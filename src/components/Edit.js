@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { kitService } from "../services/kitService.js";
 
 export const EditForm = () => {
@@ -9,6 +9,7 @@ export const EditForm = () => {
   const [condition, setCondition] = useState("");
   const [image, setImage] = useState(null);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     kitService.getKitById(id).then((kit) => {
@@ -30,7 +31,8 @@ export const EditForm = () => {
           description,
           price,
           condition,
-          image
+          image,
+          navigate
         )
       }
       className="container-form"

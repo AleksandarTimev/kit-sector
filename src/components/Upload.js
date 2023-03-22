@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { kitService } from "../services/kitService.js";
+import { useNavigate } from "react-router-dom";
 
 export const UploadForm = () => {
   const [name, setName] = useState("");
@@ -7,6 +8,7 @@ export const UploadForm = () => {
   const [price, setPrice] = useState("");
   const [condition, setCondition] = useState("");
   const [image, setImage] = useState(null);
+  const navigate = useNavigate();
 
   return (
     <form
@@ -17,7 +19,8 @@ export const UploadForm = () => {
           description,
           price,
           condition,
-          image
+          image,
+          navigate
         )
       }
       className="container-form"
