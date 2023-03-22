@@ -52,9 +52,9 @@
 .h-one {
   display: grid;
   margin-top: 20px;
-  margin-bottom: 20px; /* add some margin at the bottom */
-  font-size: 36px; /* adjust font size as needed */
-  font-weight: bold; /* add font weight for emphasis */
-  color: #000000; /* set font color */
+  margin-bottom: 20px;
+  font-size: 36px;
+  font-weight: bold;
+  color: #000000;
   text-align: center;
 }

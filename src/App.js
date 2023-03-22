@@ -12,6 +12,7 @@ import { Catalog } from "./components/Catalog.js";
 import { EditForm } from "./components/Edit.js";
 import { Details } from "./components/Details.js";
 import { NotFound } from "./components/NotFound.js";
+import { Profile } from "./components/Profile";
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/edit/:id" element={<EditForm />} />
           <Route path="/details/:id" element={<Details />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       <Footer />

@@ -35,7 +35,6 @@
   margin-right: 5px;
 }
 
-/* additional animations */
 @keyframes slideInLeft {
   from {
     transform: translateX(-100%);
@@ -70,4 +69,10 @@
   animation-duration: 0.5s;
   animation-fill-mode: both;
   animation-name: slideInRight;
+}
+
+.nav-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 0.5rem;
 }

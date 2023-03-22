@@ -7,6 +7,7 @@ import "../public/css/Catalog.css";
 export const Catalog = () => {
   const [kits, setKits] = useState([]);
   const [user, setUser] = useState(null);
+  const loading = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,34 +27,38 @@ export const Catalog = () => {
   console.log("user", user);
 
   return (
-    <div className="container">
-      <h1 className="h-one">Catalog</h1>
-      {kits.length === 0 ? (
-        <div className="center">
-          <p>No kits uploaded yet. Be the first to upload one!</p>
-        </div>
+<div className="container">
+  <h1 className="h-one">Catalog</h1>
+  {kits.length === 0 ? (
+    <div className="center">
+      {loading ? (
+        <p>Loading...</p>
       ) : (
-        <ul className="kits-grid">
-          {kits.map((kit) => (
-            <li className="kit-details li-catalog" key={kit.id}>
-              <div>
-                <h4>{kit.name}</h4>
-                <img src={kit.imageUrl} alt={kit.name} />
-              </div>
-              <div className="kit-buttons">
-                <button
-                  type="button"
-                  className="btn btn-secondary mx-2"
-                  onClick={() => kitService.handleDetailsKit(kit.id, navigate)}
-                >
-                  Details
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <p>No kits uploaded yet. Be the first to upload one!</p>
       )}
     </div>
+  ) : (
+    <ul className="kits-grid">
+      {kits.map((kit) => (
+        <li className="kit-details li-catalog" key={kit.id}>
+          <div>
+            <h4>{kit.name}</h4>
+            <img src={kit.imageUrl} alt={kit.name} />
+          </div>
+          <div className="kit-buttons">
+            <button
+              type="button"
+              className="btn btn-secondary mx-2"
+              onClick={() => kitService.handleDetailsKit(kit.id, navigate)}
+            >
+              Details
+            </button>
+          </div>
+        </li>
+      ))}
+    </ul>
+  )}
+</div>
   );
 };
 
