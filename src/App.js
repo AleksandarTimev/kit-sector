@@ -1,4 +1,4 @@
-import "./App.css";
+import "./public/css/App.css";
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { Home } from "./components/Home.js";
@@ -11,6 +11,7 @@ import { UploadForm } from "./components/Upload.js"
 import { Catalog } from "./components/Catalog.js";
 import { EditForm } from "./components/Edit.js";
 import { Details } from "./components/Details.js";
+import { NotFound } from "./components/NotFound.js";
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/edit/:id" element={<EditForm />} />
           <Route path="/details/:id" element={<Details />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       <Footer />
     </div>
