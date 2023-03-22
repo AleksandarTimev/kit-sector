@@ -41,7 +41,7 @@ export const Details = () => {
               <button
                 type="button"
                 className="btn btn-secondary mx-2"
-                onClick={() => kitService.handleDeleteKit(kit.id)}
+                onClick={() => kitService.handleDeleteKit(kit.id, navigate)}
               >
                 Delete
               </button>

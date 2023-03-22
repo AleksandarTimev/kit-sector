@@ -23,30 +23,40 @@ export const Catalog = () => {
     };
   }, []);
 
+  console.log("user", user);
+
   return (
     <div className="container">
       <h1 className="h-one">Catalog</h1>
-      <ul className="kits-grid">
-        {kits.map((kit) => (
-          <li className="kit-details li-catalog" key={kit.id}>
-            <div>
-              <h4>{kit.name}</h4>
-              <img src={kit.imageUrl} alt={kit.name} />
-            </div>
-            {user ? (
-              <div className="kit-buttons">
-                <button
-                  type="button"
-                  className="btn btn-secondary mx-2"
-                  onClick={() => kitService.handleDetailsKit(kit.id, navigate)}
-                >
-                  Details
-                </button>
+      {kits.length === 0 ? (
+        <div className="center">
+          <p>No kits uploaded yet. Be the first to upload one!</p>
+        </div>
+      ) : (
+        <ul className="kits-grid">
+          {kits.map((kit) => (
+            <li className="kit-details li-catalog" key={kit.id}>
+              <div>
+                <h4>{kit.name}</h4>
+                <img src={kit.imageUrl} alt={kit.name} />
               </div>
-            ) : null}
-          </li>
-        ))}
-      </ul>
+              {user ? (
+                <div className="kit-buttons">
+                  <button
+                    type="button"
+                    className="btn btn-secondary mx-2"
+                    onClick={() =>
+                      kitService.handleDetailsKit(kit.id, navigate)
+                    }
+                  >
+                    Details
+                  </button>
+                </div>
+              ) : null}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

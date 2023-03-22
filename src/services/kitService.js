@@ -26,7 +26,6 @@ getKits: async () => {
   },
 
  handleDetailsKit: (id, navigate) => {
-    console.log(id)
     navigate(`/details/${id}`)
   },
 
@@ -38,6 +37,7 @@ getKitById: async (id) => {
       const kitData = kitSnap.data();
       const storageRef = ref(storage, kitData.imageUrl);
       const imageUrl = await getDownloadURL(storageRef);
+      console.log(kitData)
       return { id: kitSnap.id, ...kitData, imageUrl };
     } else {
       throw new Error("Kit not found.");
@@ -77,11 +77,12 @@ handleEditSubmit: async (event, id, name, description, price, condition, image, 
   }
 },
 
-  handleDeleteKit: async (id) => {
+  handleDeleteKit: async (id, navigate) => {
     try {
       const kit = doc(db, "shirts", id);
       await deleteDoc(kit);
       alert("Kit deleted successfully!");
+      navigate("/catalog");
     } catch (err) {
       console.log(err)
       alert("Could not delete kit!");

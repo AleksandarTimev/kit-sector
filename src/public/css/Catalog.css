@@ -104,3 +104,16 @@
     width: 100%;
     height: auto;
   }
+
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+  }
+  
+  p {
+    font-size: 25px;
+    position: relative;
+    font-weight: 300;
+  }
