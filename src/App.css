@@ -13,9 +13,10 @@
   }
 }
 
-.logo {
+.logo img{
   max-width: 30px;
   height: auto;
+  border: none;
 }
 
 .App-header {

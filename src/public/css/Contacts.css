@@ -26,6 +26,12 @@
     text-align: center; /* add this rule to center the content vertically */
     margin-top: 30px; /* add a margin at the top */
   }
+
+  @media (max-width: 1023px) {
+    .wrapper-contacts {
+      display: block;
+    }
+  }
   
   .contact-us {
     display: grid;

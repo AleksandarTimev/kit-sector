@@ -23,7 +23,7 @@ export const Navbar = () => {
   return (
     <div className="navbox">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <img className="logo" src="logo.png" alt="logo"></img>
+        <img className="logo img" src="logo.png" alt="logo"></img>
         <Link className="navbar-brand" to="/">
           KIT SECTOR
         </Link>
