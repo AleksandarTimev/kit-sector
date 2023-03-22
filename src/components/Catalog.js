@@ -40,19 +40,15 @@ export const Catalog = () => {
                 <h4>{kit.name}</h4>
                 <img src={kit.imageUrl} alt={kit.name} />
               </div>
-              {user ? (
-                <div className="kit-buttons">
-                  <button
-                    type="button"
-                    className="btn btn-secondary mx-2"
-                    onClick={() =>
-                      kitService.handleDetailsKit(kit.id, navigate)
-                    }
-                  >
-                    Details
-                  </button>
-                </div>
-              ) : null}
+              <div className="kit-buttons">
+                <button
+                  type="button"
+                  className="btn btn-secondary mx-2"
+                  onClick={() => kitService.handleDetailsKit(kit.id, navigate)}
+                >
+                  Details
+                </button>
+              </div>
             </li>
           ))}
         </ul>
