@@ -68,6 +68,7 @@ handleEditSubmit: async (event, id, name, description, price, condition, image, 
       price: Number(price),
       condition: condition,
       imageUrl: imageUrl,
+      userId: auth?.currentUser?.uid,
     });
     alert("Kit updated successfully!");
     navigate(`/details/${kit.id}`)
