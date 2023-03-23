@@ -9,11 +9,11 @@ import {
   setDoc,
   deleteDoc,
   doc,
+  query,
+  where
   // updateDoc
 } from "firebase/firestore";
 import { useState } from "react";
-
- // initialize the storage reference
 
 export const kitService = {
 
@@ -23,6 +23,27 @@ getKits: async () => {
     const kits = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     console.log(kits)
     return kits;
+  },
+
+  getUserKits: async () => {
+    const user = auth.currentUser;
+
+    if (!user) {
+      throw new Error("User is not authenticated.");
+    }
+
+    const q = query(
+      collection(db, "shirts"),
+      where("userId", "==", user.uid)
+    );
+
+    const querySnapshot = await getDocs(q);
+    const userKits = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    return userKits;
   },
 
  handleDetailsKit: (id, navigate) => {

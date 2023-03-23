@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { auth, db } from "../firebase.js";
+import { auth } from "../firebase.js";
 import { useNavigate } from "react-router-dom";
 import { kitService } from "../services/kitService.js";
 import "../public/css/Profile.css";
@@ -14,26 +13,20 @@ export const Profile = () => {
     const authListener = auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
-        const q = query(
-          collection(db, "shirts"),
-          where("userId", "==", user.uid)
-        );
-        getDocs(q)
-        .then((querySnapshot) => {
-          const userKits = [];
-          querySnapshot.forEach((doc) => {
-            userKits.push({ ...doc.data(), id: doc.id });
+        kitService.getUserKits(user.uid)
+          .then((kits) => {
+            setKits(kits);
+          })
+          .catch((error) => {
+            console.log(error);
           });
-          setKits(userKits);
-        })
-        .catch((error) => {
-          console.log("Error getting kits: ", error);
-          });
-        } else {
+      } else {
         setUser(null);
-        navigate('/notauthorized')
+        navigate("/notauthorized");
+        setKits([]);
       }
     });
+
     return () => {
       authListener();
     };
