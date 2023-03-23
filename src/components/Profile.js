@@ -31,12 +31,13 @@ export const Profile = () => {
           });
       } else {
         setUser(null);
+        navigate('/notfound')
       }
     });
     return () => {
       authListener();
     };
-  }, []);
+  }, [navigate]);
 
   return (
     <div className="container">

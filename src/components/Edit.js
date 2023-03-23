@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { auth } from "../firebase.js";
 import { kitService } from "../services/kitService.js";
 
 export const EditForm = () => {
+  const [user, setUser] = useState(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -20,6 +22,20 @@ export const EditForm = () => {
       setImage(kit.image);
     });
   }, [id]);
+
+  useEffect(() => {
+    const authListener = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+        navigate('/notauthorized')
+      }
+    });
+    return () => {
+      authListener();
+    };
+  }, [user, navigate]);
 
   return (
     <form
