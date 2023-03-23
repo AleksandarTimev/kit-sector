@@ -1,0 +1,39 @@
+h4 {
+  margin-bottom: 30px;
+}
+
+.profile {
+    background-image: url('https://img.freepik.com/free-vector/white-gold-geometric-pattern-background-vector_53876-140726.jpg?w=1380&t=st=1679260580~exp=1679261180~hmac=e302e640920be6aff74e2a40c5f6512c845519845e718e10bc1e2c7a33fd409b');
+    background-size: cover;
+    background-position: center;
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .profile-header h2 {
+    font-size: 32px;
+}
+
+.profile-pic {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .profile-pic img {
+    margin-top: 1px;
+  }
