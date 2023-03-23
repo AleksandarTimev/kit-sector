@@ -30,7 +30,7 @@ export const EditForm = () => {
         console.log(user)
       } else {
         setUser(null);
-        navigate('/notauthorized')
+        navigate('/404')
       }
     });
     

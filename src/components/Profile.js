@@ -24,7 +24,7 @@ export const Profile = () => {
           });
       } else {
         setUser(null);
-        navigate("/notauthorized");
+        navigate("/404");
         setKits([]);
       }
     });

@@ -5,8 +5,8 @@ export const NotFound = () => {
   return (
     <div className="not-found hero">
       <h1>404 Page Not Found</h1>
-      <p className="home-page">Go back to <Link to="/">homepage</Link>.</p>
-      <p className="subs">Disgrace.</p>
+      <p className="home-page">Go park the bus at <Link to="/" className="link-home">home</Link>.</p>
+      <p className="subs">Is a disgrace.</p>
     </div>
   );
 };
