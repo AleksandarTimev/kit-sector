@@ -1,29 +1,61 @@
 .not-found {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    text-align: center;
-    background-color: #f2f2f2;
-  }
-  
-  .not-found h1 {
-    font-size: 4rem;
-    margin-bottom: 2rem;
-  }
-  
-  .not-found p {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  background-color: #f2f2f2;
+}
 
-  .hero {
-    background-image: url('https://img.freepik.com/free-vector/white-gold-geometric-pattern-background-vector_53876-140726.jpg?w=1380&t=st=1679260580~exp=1679261180~hmac=e302e640920be6aff74e2a40c5f6512c845519845e718e10bc1e2c7a33fd409b');
-    background-size: cover;
-    background-position: center;
-    height: 90vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.not-found h1 {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+  color: azure;
+}
+
+.not-found p {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: azure;
+  font-style: italic;
+}
+
+.not-found {
+  background-image: url('https://preview.redd.it/v36iazweool61.jpg?width=640&crop=smart&auto=webp&s=2af745eed701351fb2e97b3f320e63500c1676ac');
+  background-size: cover;
+  padding-top: 50px;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  color: azure;
+  margin-bottom: 150px;
+  margin-left: 1050px;
+}
+
+.home-page {
+  color: azure;
+  font-style: italic;
+  margin-top: 120px;
+  margin-left: 1050px;
+}
+
+.subs {
+  color: azure;
+  font-style: italic;
+  margin-top: 120px;
+}
+
+@media screen and (max-width: 768px) {
+  h1,
+  .home-page,
+  .subs {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
   }
+}

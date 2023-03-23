@@ -7,13 +7,15 @@ import "../public/css/Profile.css";
 export const Profile = () => {
   const [user, setUser] = useState(null);
   const [kits, setKits] = useState([]);
+  const loading = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const authListener = auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
-        kitService.getUserKits(user.uid)
+        kitService
+          .getUserKits(user.uid)
           .then((kits) => {
             setKits(kits);
           })
@@ -31,8 +33,8 @@ export const Profile = () => {
       authListener();
     };
   }, [navigate]);
-  
-  console.log(kits)
+
+  console.log(kits);
 
   return (
     <div className="container">
@@ -44,7 +46,7 @@ export const Profile = () => {
           width="75"
           height="75"
         />
-            {user && <p>Email: {user.email}</p>}
+        {user && <p>Email: {user.email}</p>}
       </div>
       <div className="profile">
         <div className="avatar"></div>
@@ -73,7 +75,13 @@ export const Profile = () => {
               ))}
             </ul>
           ) : (
-            <p>You have not uploaded any kits yet.</p>
+            <div className="center">
+              {loading ? (
+                <p>Loading...</p>
+              ) : (
+                <p>No kits uploaded yet. Be the first to upload one!</p>
+              )}
+            </div>
           )}
         </div>
       </div>
