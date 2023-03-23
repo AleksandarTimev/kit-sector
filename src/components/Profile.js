@@ -19,25 +19,27 @@ export const Profile = () => {
           where("userId", "==", user.uid)
         );
         getDocs(q)
-          .then((querySnapshot) => {
-            const userKits = [];
-            querySnapshot.forEach((doc) => {
-              userKits.push(doc.data());
-            });
-            setKits(userKits);
-          })
-          .catch((error) => {
-            console.log("Error getting kits: ", error);
+        .then((querySnapshot) => {
+          const userKits = [];
+          querySnapshot.forEach((doc) => {
+            userKits.push({ ...doc.data(), id: doc.id });
           });
-      } else {
+          setKits(userKits);
+        })
+        .catch((error) => {
+          console.log("Error getting kits: ", error);
+          });
+        } else {
         setUser(null);
-        navigate('/notfound')
+        navigate('/notauthorized')
       }
     });
     return () => {
       authListener();
     };
   }, [navigate]);
+  
+  console.log(kits)
 
   return (
     <div className="container">

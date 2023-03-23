@@ -26,6 +26,7 @@ getKits: async () => {
   },
 
  handleDetailsKit: (id, navigate) => {
+  console.log(id)
     navigate(`/details/${id}`)
   },
 
@@ -126,7 +127,16 @@ handleEditSubmit: async (event, id, name, description, price, condition, image, 
 
   handleSubmit: async (event, name, description, price, condition, image, navigate) => {
     event.preventDefault();
-    if (!image) return;
+    if (!image) {
+      return;
+    } 
+
+    const acceptedFileTypes = ["image/png", "image/jpeg", "image/webp"];
+
+    if (!acceptedFileTypes.includes(image.type)) {
+      alert("Please upload a valid image file (PNG, JPEG, or WEBP).");
+      return;
+    }
     try {
       const storageRef = ref(storage, `kits/${image.name}`);
       const imageRef = ref(storageRef, image.name);
