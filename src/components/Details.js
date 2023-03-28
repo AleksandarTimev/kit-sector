@@ -54,6 +54,17 @@ export const Details = () => {
               </button>
             </div>
           ) : null}
+          {user && user.uid !== kit.userId ? (
+            <div className="kit-buttons">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => handleEditKit(kit.id)}
+              >
+                Add to cart
+              </button>
+            </div>
+          ) : null}
         </div>
       ) : (
         <p>Loading...</p>
