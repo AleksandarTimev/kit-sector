@@ -158,6 +158,7 @@ handleEditSubmit: async (event, id, name, description, price, condition, image, 
       alert("Please upload a valid image file (PNG, JPEG, or WEBP).");
       return;
     }
+  
     try {
       const storageRef = ref(storage, `kits/${image.name}`);
       const imageRef = ref(storageRef, image.name);

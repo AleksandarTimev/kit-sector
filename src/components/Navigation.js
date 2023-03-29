@@ -63,7 +63,7 @@ export const Navbar = () => {
                     Upload
                   </Link>
                 </li>
-              <li className="nav-item">
+                <li className="nav-item">
                   <Link className="nav-link" to="/profile">
                     Profile
                   </Link>
@@ -73,10 +73,10 @@ export const Navbar = () => {
                     Cart
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <button onClick={logout} className="log-out">
-                    Log Out
-                  </button>
+                <li onClick={logout} className="nav-item">
+                    <Link className="nav-link log-out" to="/">
+                      Log Out
+                    </Link>
                 </li>
               </>
             ) : (
