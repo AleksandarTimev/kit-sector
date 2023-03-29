@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { auth } from "../firebase.js";
 import { kitService } from "../services/kitService.js";
+import { likeService } from "../services/likeService.js";
 
 export const Details = () => {
   const [kit, setKit] = useState(null);
@@ -36,6 +37,7 @@ export const Details = () => {
           <p>Price: ${kit.price}</p>
           <p>Condition: {kit.condition}</p>
           <p>Description: {kit.description}</p>
+          <p>Likes: {kit.likes}</p>
           {user && user.uid === kit.userId ? (
             <div className="kit-buttons">
               <button
@@ -59,9 +61,9 @@ export const Details = () => {
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={() => handleEditKit(kit.id)}
+                onClick={() => likeService.likeHandler(kit.id)}
               >
-                Add to cart
+                Give Like
               </button>
             </div>
           ) : null}

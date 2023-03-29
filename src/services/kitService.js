@@ -70,7 +70,7 @@ getKitById: async (id) => {
   }
 },
 
-handleEditSubmit: async (event, id, name, description, price, condition, image, navigate) => {
+handleEditSubmit: async (event, id, name, description, price, condition, image, likes, navigate) => {
   event.preventDefault();
   try {
     const kitRef = doc(db, "shirts", id);
@@ -91,6 +91,7 @@ handleEditSubmit: async (event, id, name, description, price, condition, image, 
       condition: condition,
       imageUrl: imageUrl,
       userId: auth?.currentUser?.uid,
+      likes: 0,
     });
     alert("Kit updated successfully!");
     navigate(`/details/${kit.id}`)
@@ -171,6 +172,7 @@ handleEditSubmit: async (event, id, name, description, price, condition, image, 
         condition,
         imageUrl,
         userId: auth?.currentUser?.uid,
+        likes: 0,
       });
       alert("Uploaded successfully!");
       navigate('/catalog');

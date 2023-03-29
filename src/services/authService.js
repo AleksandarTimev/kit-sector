@@ -3,7 +3,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { auth } from "../firebase.js";
+import { addDoc, collection } from "firebase/firestore";
+import { auth, db } from "../firebase.js";
 
 export const register = async (email, password, confirmPassword, gender) => {
   if (password !== confirmPassword) {
@@ -12,15 +13,23 @@ export const register = async (email, password, confirmPassword, gender) => {
   }
 
   try {
-    const user = await createUserWithEmailAndPassword(
+    // Create user in Firebase Authentication
+    const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
-      password,
-      gender
+      password
     );
+
+    // Add user to Firestore "users" collection
+    await addDoc(collection(db, "users"), {
+      email,
+      gender,
+      userId: userCredential.user.uid
+    });
+
     // User has been registered successfully
     alert("User registered successfully!");
-    console.log(user);
+    console.log(userCredential.user);
   } catch (error) {
     alert(error.message);
   }
