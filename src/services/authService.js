@@ -13,21 +13,18 @@ export const register = async (email, password, confirmPassword, gender) => {
   }
 
   try {
-    // Create user in Firebase Authentication
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
 
-    // Add user to Firestore "users" collection
     await addDoc(collection(db, "users"), {
       email,
       gender,
       userId: userCredential.user.uid
     });
 
-    // User has been registered successfully
     alert("User registered successfully!");
     console.log(userCredential.user);
   } catch (error) {

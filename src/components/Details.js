@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { auth } from "../firebase.js";
 import { kitService } from "../services/kitService.js";
 import { likeService } from "../services/likeService.js";
+import "../public/css/Details.css";
 
 export const Details = () => {
   const [kit, setKit] = useState(null);
@@ -33,11 +34,11 @@ export const Details = () => {
       {kit ? (
         <div className="li-catalog">
           <h1>{kit.name}</h1>
-          <img src={kit.imageUrl} alt={kit.name} width="600" height="600"/>
+          <img src={kit.imageUrl} alt={kit.name} width="600" height="600" />
           <p>Price: ${kit.price}</p>
           <p>Condition: {kit.condition}</p>
           <p>Description: {kit.description}</p>
-          <p>Likes: {kit.likes}</p>
+          <p>Likes: {kit.userLikes?.length || 0}</p>
           {user && user.uid === kit.userId ? (
             <div className="kit-buttons">
               <button
@@ -58,13 +59,35 @@ export const Details = () => {
           ) : null}
           {user && user.uid !== kit.userId ? (
             <div className="kit-buttons">
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => likeService.likeHandler(kit.id)}
-              >
-                Give Like
-              </button>
+              {kit.userLikes && kit.userLikes.includes(user.uid) ? (
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={() => likeService.dislikeHandler(kit.id, user, setKit)}
+                >
+                  <img
+                    className="like-given border-0"
+                    src="https://cdn-icons-png.flaticon.com/512/169/169776.png"
+                    alt="Like"
+                    width="75"
+                    height="75"
+                  />
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="btn btn-success"
+                  onClick={() => likeService.likeHandler(kit.id, user, setKit)}
+                >
+                  <img
+                    className="like-given border-0"
+                    src="https://uxwing.com/wp-content/themes/uxwing/download/hand-gestures/like-button-icon.png"
+                    alt="Dislike"
+                    width="75"
+                    height="75"
+                  />
+                </button>
+              )}
             </div>
           ) : null}
         </div>

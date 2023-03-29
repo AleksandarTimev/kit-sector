@@ -1,0 +1,10 @@
+.like-given {
+    filter: brightness(130%);
+    border: none;
+    outline: none;
+  }
+  
+  .like-given:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
