@@ -20,8 +20,12 @@ export const EditForm = () => {
       setPrice(kit.price);
       setCondition(kit.condition);
       setImage(kit.image);
+      
+      if (user && kit.ownerId !== user.uid) {
+        navigate('/404');
+      }
     });
-  }, [id]);
+  }, [id, navigate, user]);
 
   useEffect(() => {
     const authListener = auth.onAuthStateChanged((user) => {

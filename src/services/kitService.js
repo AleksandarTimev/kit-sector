@@ -147,7 +147,7 @@ handleEditSubmit: async (event, id, name, description, price, condition, image, 
     setImage(event.target.files[0]);
   },
 
-  handleSubmit: async (event, name, description, price, condition, image, navigate) => {
+  handleSubmit: async (event, name, description, price, condition, image, likes, navigate) => {
     event.preventDefault();
     if (!image) {
       return;
@@ -172,7 +172,7 @@ handleEditSubmit: async (event, id, name, description, price, condition, image, 
         condition,
         imageUrl,
         userId: auth?.currentUser?.uid,
-        likes: 0,
+        likes:0,
       });
       alert("Uploaded successfully!");
       navigate('/catalog');

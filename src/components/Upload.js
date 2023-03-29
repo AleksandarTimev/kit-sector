@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { kitService } from "../services/kitService.js";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../firebase.js";
 
 export const UploadForm = () => {
   const [name, setName] = useState("");
@@ -9,6 +10,16 @@ export const UploadForm = () => {
   const [condition, setCondition] = useState("");
   const [image, setImage] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (!user) {
+        navigate('/404');
+      }
+    });
+
+    return unsubscribe;
+  }, [navigate]);
 
   return (
     <form
