@@ -9,17 +9,18 @@
 
 .log-out {
   color: #0c0b0b;
-  background-color: #e86e6e;
+  background-color: #f5d7d7;
   border-color: #ef5959;
   transition: all 0.3s ease;
-  border-radius: 5px;
+  border-radius: 25px;
   padding: 5px 10px;
   margin-right: 5px;
 }
 
 .log-out:hover {
   color: #ef5959;
-  background-color: transparent;
+  background-color: #ef5959;
+  border-radius: 5px;
   border-color: #ef5959;
 }
 
