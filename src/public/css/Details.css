@@ -8,3 +8,11 @@
     transform: scale(1.05);
     cursor: pointer;
   }
+
+  .cart-btn {
+    margin-right: 10px;
+  }
+
+  .kit-buttons {
+    margin-bottom: 10px;
+  }

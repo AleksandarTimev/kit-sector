@@ -70,13 +70,16 @@ getKitById: async (id) => {
   }
 },
 
-handleEditSubmit: async (event, id, name, description, price, condition, image, likes, navigate) => {
+handleEditSubmit: async (event, id, name, description, price, condition, image, navigate) => {
   event.preventDefault();
   try {
     const kitRef = doc(db, "shirts", id);
     const kit = await getDoc(kitRef);
     const kitData = kit.data();
     let imageUrl = kitData.imageUrl;
+    const likes = kitData.likes;
+    const userLikes = kitData.userLikes;
+    console.log(userLikes);
 
     if (image !== null) {
       const storageRef = ref(storage, imageUrl);
@@ -91,7 +94,8 @@ handleEditSubmit: async (event, id, name, description, price, condition, image, 
       condition: condition,
       imageUrl: imageUrl,
       userId: auth?.currentUser?.uid,
-      likes: 0,
+      userLikes: userLikes,
+      likes: likes,
     });
     alert("Kit updated successfully!");
     navigate(`/details/${kit.id}`)
@@ -147,7 +151,7 @@ handleEditSubmit: async (event, id, name, description, price, condition, image, 
     setImage(event.target.files[0]);
   },
 
-  handleSubmit: async (event, name, description, price, condition, image, likes, navigate) => {
+  handleSubmit: async (event, name, description, price, condition, image, navigate) => {
     event.preventDefault();
     if (!image) {
       return;

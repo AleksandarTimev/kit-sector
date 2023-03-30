@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { auth } from "../firebase.js";
 import { kitService } from "../services/kitService.js";
 import { likeService } from "../services/likeService.js";
+import { cartService } from "../services/cartService.js";
 import "../public/css/Details.css";
 
 export const Details = () => {
@@ -59,11 +60,26 @@ export const Details = () => {
           ) : null}
           {user && user.uid !== kit.userId ? (
             <div className="kit-buttons">
+              <button
+                type="button"
+                className="btn btn-secondary cart-btn"
+                onClick={() => cartService.addToCartHandler(kit.id, user, setKit)}
+              >
+                <img
+                  className="like-given border-0"
+                  src="https://cdn.pixabay.com/photo/2015/12/23/01/14/edit-1105049_960_720.png"
+                  alt="Cart"
+                  width="75"
+                  height="75"
+                />
+              </button>
               {kit.userLikes && kit.userLikes.includes(user.uid) ? (
                 <button
                   type="button"
                   className="btn btn-danger"
-                  onClick={() => likeService.dislikeHandler(kit.id, user, setKit)}
+                  onClick={() =>
+                    likeService.dislikeHandler(kit.id, user, setKit)
+                  }
                 >
                   <img
                     className="like-given border-0"

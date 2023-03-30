@@ -21,7 +21,7 @@ export const EditForm = () => {
       setCondition(kit.condition);
       setImage(kit.image);
       
-      if (user && kit.ownerId !== user.uid) {
+      if (user && kit.userId !== user.uid) {
         navigate('/404');
       }
     });

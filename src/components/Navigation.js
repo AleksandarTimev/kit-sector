@@ -65,12 +65,12 @@ export const Navbar = () => {
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/profile">
-                    Profile
+                    My Profile
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/cart">
-                    Cart
+                    My Cart
                   </Link>
                 </li>
                 <li onClick={logout} className="nav-item">
