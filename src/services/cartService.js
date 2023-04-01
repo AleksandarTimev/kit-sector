@@ -31,13 +31,14 @@ export const cartService = {
     // Update Firestore document with new shopping cart data
     await updateDoc(userRef, {
       userCart: userCart,
+      userId: user.uid,
     });
 
     // Add the shopping cart data to the "shoppingCarts" collection
-    await addDoc(collection(db, "shoppingCarts"), {
-      userId: user.uid,
-      kitIds: userCart,
-    });
+    // await updateDoc(collection(db, "shoppingCarts"), {
+    //   userId: user.uid,
+    //   kitsIdInCart: userCart,
+    // });
 
     // Fetch the updated user data and set the cart state
     const updatedUserData = await getDoc(userRef);
@@ -67,6 +68,7 @@ export const cartService = {
 
     // Update Firestore document with new shopping cart data
     await updateDoc(userRef, {
+
       userCart: updatedUserCart,
     });
 
