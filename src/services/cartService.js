@@ -1,4 +1,4 @@
-import { doc, updateDoc, getDoc, setDoc, query, collection, where, getDocs   } from "firebase/firestore";
+import { doc, updateDoc, getDoc, setDoc } from "firebase/firestore";
 import { kitService } from "./kitService.js";
 import { auth, db } from "../firebase";
 
@@ -72,17 +72,6 @@ export const cartService = {
     await updateDoc(userRef, {
       userCart: updatedUserCart,
     });
-
-    // // Remove kitId from shoppingCarts collection
-    // const cartQuery = collection(db, "shoppingCarts")
-    //   .where("userId", "==", user.uid)
-    //   .where("kitIds", "array-contains", kitId);
-    // const cartDocs = await getDocs(cartQuery);
-    // cartDocs.forEach((doc) => {
-    //   updateDoc(doc.ref, {
-    //     kitIds: doc.data().kitIds.filter((id) => id !== kitId),
-    //   });
-    // });
 
     // Fetch the updated user data and set the cart state
     const updatedUserData = await getDoc(userRef);

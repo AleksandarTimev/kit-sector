@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { auth } from "../firebase";
 import { cartService } from "../services/cartService";
-import { kitService } from "../services/kitService";
 import { useNavigate, Link } from "react-router-dom";
 import "../public/css/Cart.css";
 
