@@ -1,8 +1,9 @@
-import { doc, updateDoc, getDoc, setDoc, getDocs, addDoc, collection } from "firebase/firestore";
+import { doc, updateDoc, getDoc, setDoc } from "firebase/firestore";
+import { kitService } from "./kitService.js";
 import { db } from "../firebase";
 
 export const cartService = {
-  addToCartHandler: async (kitId, user, setCart) => {
+  addToCartHandler: async (kitId, user, setCart, setKit) => {
     const userRef = doc(db, "users", user.uid);
     const userData = await getDoc(userRef);
     let userCart = [];
@@ -20,13 +21,16 @@ export const cartService = {
       });
     }
 
-    if (userCart.includes(kitId)) {
-      console.log("This item is already in your cart!");
+    if (userCart.some((kit) => kit.id === kitId)) {
+      alert("This item is already in your cart!");
       return;
     }
 
-    // Add kitId to userCart array
-    userCart.push(kitId);
+    // Get the full kit object from Firestore
+    const kit = await kitService.getKitById(kitId);
+
+    // Add the kit object to the user's cart
+    userCart.push(kit);
 
     // Update Firestore document with new shopping cart data
     await updateDoc(userRef, {
@@ -34,16 +38,14 @@ export const cartService = {
       userId: user.uid,
     });
 
-    // Add the shopping cart data to the "shoppingCarts" collection
-    // await updateDoc(collection(db, "shoppingCarts"), {
-    //   userId: user.uid,
-    //   kitsIdInCart: userCart,
-    // });
-
     // Fetch the updated user data and set the cart state
     const updatedUserData = await getDoc(userRef);
     const updatedCart = updatedUserData.data().userCart || [];
     setCart(updatedCart);
+    
+    // Fetch the updated kit data and update the kit state
+    const updatedKitData = await kitService.getKitById(kitId);
+    setKit(updatedKitData);
   },
 
   removeFromCartHandler: async (kitId, user, setCart) => {
@@ -68,24 +70,53 @@ export const cartService = {
 
     // Update Firestore document with new shopping cart data
     await updateDoc(userRef, {
-
       userCart: updatedUserCart,
     });
 
-    // Remove kitId from shoppingCarts collection
-    const cartQuery = collection(db, "shoppingCarts")
-      .where("userId", "==", user.uid)
-      .where("kitIds", "array-contains", kitId);
-    const cartDocs = await getDocs(cartQuery);
-    cartDocs.forEach((doc) => {
-      updateDoc(doc.ref, {
-        kitIds: doc.data().kitIds.filter((id) => id !== kitId),
-      });
-    });
+    // // Remove kitId from shoppingCarts collection
+    // const cartQuery = collection(db, "shoppingCarts")
+    //   .where("userId", "==", user.uid)
+    //   .where("kitIds", "array-contains", kitId);
+    // const cartDocs = await getDocs(cartQuery);
+    // cartDocs.forEach((doc) => {
+    //   updateDoc(doc.ref, {
+    //     kitIds: doc.data().kitIds.filter((id) => id !== kitId),
+    //   });
+    // });
 
     // Fetch the updated user data and set the cart state
     const updatedUserData = await getDoc(userRef);
     const updatedCart = updatedUserData.data().userCart || [];
     setCart(updatedCart);
+  },
+
+  fetchCart: async (user, setCart, setKits) => {
+    const userRef = doc(db, "users", user.uid);
+    const userData = await getDoc(userRef);
+    console.log(userData);
+
+    if (userData.exists()) {
+      const userCart = userData.data().userCart || [];
+      setCart(userCart);
+      console.log(userCart);
+
+      // Fetch the kit data for each kit in the cart
+      const kitData = {};
+      await Promise.all(
+        userCart.map(async (kitId) => {
+          const kitRef = doc(db, "shirts", kitId);
+          const kitDoc = await getDoc(kitRef);
+          if (kitDoc.exists()) {
+            kitData[kitId] = kitDoc.data();
+            console.log(kitData);
+          }
+        })
+      );
+      setKits(kitData);
+      console.log(kitData);
+    } else {
+      setCart([]);
+      console.log(setCart);
+    }
   },
 };
