@@ -108,4 +108,8 @@ export const cartService = {
       throw new Error("User cart does not exist.");
     }
   },
+
+  orderHandled: () => {
+    alert("Your order has been confirmed!")
+  }
 };
