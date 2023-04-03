@@ -50,7 +50,6 @@ export const Profile = () => {
       </div>
       <div className="profile">
         <div className="avatar"></div>
-        <div className="profile-kits">
           <h3>Your Kits:</h3>
           {kits.length > 0 ? (
             <ul className="kits-grid">
@@ -85,7 +84,6 @@ export const Profile = () => {
           )}
         </div>
       </div>
-    </div>
   );
 };
 

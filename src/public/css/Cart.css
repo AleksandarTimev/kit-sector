@@ -1,47 +1,86 @@
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .profile-pic {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .profile-pic h2 {
-    margin-left: 10px;
-    font-size: 24px;
-  }
-  
-  .profile-pic img {
-    margin-right: 10px;
-  }
-  
-  table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  thead th {
-    background-color: #f2f2f2;
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  tbody td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  img {
-    max-width: 100px;
-    max-height: 100px;
-  }
+.profile-kits {
+  background-image: url("https://img.freepik.com/free-vector/white-gold-geometric-pattern-background-vector_53876-140726.jpg?w=1380&t=st=1680096909~exp=1680097509~hmac=e5074a3d5df9f8e08ee6b8e4ac4b03835abe45ca94d497282bb38bef3375db54");
+  background-size: cover;
+  background-position: center;
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+img {
+  margin-bottom: 1rem;
+}
+
+.profile-kits {
+  width: 100%;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+th,
+td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  background-color: #f2f2f2;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.row-cart {
+  color: #333;
+}
+
+.img-cart {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.total-price-text {
+  font-weight: bold;
+  text-align: right;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.total-price-value {
+  font-weight: bold;
+  text-align: left;
+  padding: 10px;
+  font-size: 20px;
+  color: #333;
+  border-top: #f2f2f2;
+  margin-top: 10px;
+  text-align: right;
+}

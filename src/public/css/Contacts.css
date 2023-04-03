@@ -22,9 +22,10 @@
     grid-template-columns: 1fr 2fr;
     gap: 20px;
     align-items: center;
-    justify-content: center; /* add this rule to center the content horizontally */
-    text-align: center; /* add this rule to center the content vertically */
-    margin-top: 30px; /* add a margin at the top */
+    justify-content: center;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
 
   @media (max-width: 1023px) {
@@ -46,6 +47,7 @@
   .map-container {
     grid-column: 1 / 2;
     grid-row: 1 / 3;
+    margin-bottom: 50px;
   }
   
   .contact-info {
