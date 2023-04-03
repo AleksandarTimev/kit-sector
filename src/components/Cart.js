@@ -7,26 +7,23 @@ import "../public/css/Cart.css";
 export function Cart() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const [kits, setKits] = useState([]);
+  const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     const authListener = auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
-        cartService
-          .fetchCart(user.uid)
-          .then((kits) => {
-            setKits(kits);
-            console.log(kits);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        cartService.fetchCart(user.uid).then((cart) => {
+          setCart(cart);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       } else {
         setUser(null);
         navigate("/404");
-        setKits([]);
+        setCart([]);
       }
     });
 
@@ -36,11 +33,15 @@ export function Cart() {
   }, [navigate]);
 
   useEffect(() => {
-    const totalPrice = kits.reduce((accumulator, kit) => {
+    const totalPrice = cart.reduce((accumulator, kit) => {
       return accumulator + Number(kit.price);
     }, 0);
     setTotalPrice(totalPrice);
-  }, [kits]);
+  }, [cart]);
+
+  const removeFromCart = async (kitId) => {
+    await cartService.removeFromCartHandler(kitId, user, setCart);
+  }
 
   return (
     <div className="container">
@@ -62,10 +63,11 @@ export function Cart() {
               <th>Description</th>
               <th>Price</th>
               <th>Kit</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {kits.map((kit) => (
+            {cart.map((kit) => (
               <tr key={kit.id}>
                 <td>
                   <Link className="row-cart" to={`/details/${kit.id}`}>
@@ -77,9 +79,13 @@ export function Cart() {
                 <td className="row-cart">
                   <img className="img-cart" src={kit.imageUrl} alt={kit.name} />
                 </td>
+                <td>
+                  <button className="btn btn-danger" onClick={() => removeFromCart(kit.id)}>Remove</button>
+                </td>
               </tr>
             ))}
             <tr>
+              <td></td>
               <td></td>
               <td></td>
               <td className="total-price-text">Total Price:</td>
