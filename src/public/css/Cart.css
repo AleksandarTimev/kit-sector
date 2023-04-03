@@ -12,6 +12,7 @@
   align-items: center;
   margin-bottom: 50px;
 }
+
 .cart-container {
   display: flex;
   flex-direction: column;
@@ -21,10 +22,6 @@
 
 h2 {
   font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-img {
   margin-bottom: 1rem;
 }
 
