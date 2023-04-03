@@ -1,37 +1,38 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { auth } from "../firebase";
 import { cartService } from "../services/cartService";
+import { useNavigate } from "react-router-dom";
+import "../public/css/Cart.css"
 
 export function Cart() {
-  const [cart, setCart] = useState([]);
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const [kits, setKits] = useState({});
+  const [kits, setKits] = useState([]);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const authListener = auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
-        // Fetch the user's shopping cart from Firestore
-        cartService.fetchCart(user, setCart, setKits);
+        cartService
+          .fetchCart(user.uid)
+          .then((kits) => {
+            setKits(kits);
+            console.log(kits);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       } else {
-        setCart([]);
+        setUser(null);
+        navigate("/404");
+        setKits([]);
       }
     });
 
-    return unsubscribe;
-  }, []);
-
-  const handleRemoveFromCart = async (kitId) => {
-    const user = auth.currentUser;
-    if (user) {
-      await cartService.removeFromCartHandler(kitId, user, setCart);
-    }
-  };
-
-  // Calculate the total price of all kits in the cart
-  // const totalPrice = Object.values(kits).reduce((total, kit) => {
-  //   return total + kit.price;
-  // }, 0);
+    return () => {
+      authListener();
+    };
+  }, [navigate]);
 
   return (
     <div className="container">
@@ -45,59 +46,31 @@ export function Cart() {
         />
         {user && <p>Email: {user.email}</p>}
       </div>
-      <div className="profile">
-        <div className="avatar"></div>
-        <div className="profile-kits">
-          <h3>Your Cart:</h3>
-          {cart.length > 0 ? (
-            <table>
-              <thead>
-                <tr>
-                  <th>Image</th>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>Remove from Cart</th>
-                </tr>
-              </thead>
-              <tbody>
-                {cart.map((kitId) => {
-                  const kit = kits[kitId];
-                  if (!kit) return null;
-                  return (
-                    <tr key={kitId}>
-                      <td>
-                        <img src={kit.image} alt="Kit" width="100" height="100" />
-                      </td>
-                      <td>{kit.name}</td>
-                      <td>${kit.price.toFixed(2)}</td>
-                      <td>
-                        <button
-                          type="button"
-                          className="btn btn-secondary mx-2"
-                          onClick={() => handleRemoveFromCart(kitId)}
-                        >
-                          Remove
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })}
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td>Total:</td>
-                  <td>$20.00</td>
-                </tr>
-              </tbody>
-            </table>
-          ) : (
-            <p>Your cart is empty!</p>
-          )}
-          <button className="btn btn-primary">Checkout</button>
-        </div>
-      </div>
+      <h1>My Cart:</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Image</th>
+          </tr>
+        </thead>
+        <tbody>
+          {kits.map((kit) => (
+            <tr key={kit.id}>
+              <td>{kit.name}</td>
+              <td>{kit.description}</td>
+              <td>{kit.price}</td>
+              <td>
+                <img src={kit.imageUrl} alt={kit.name} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
-};
+}
 
 export default Cart;

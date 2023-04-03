@@ -1,6 +1,6 @@
-import { doc, updateDoc, getDoc, setDoc } from "firebase/firestore";
+import { doc, updateDoc, getDoc, setDoc, query, collection, where, getDocs   } from "firebase/firestore";
 import { kitService } from "./kitService.js";
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
 
 export const cartService = {
   addToCartHandler: async (kitId, user, setCart, setKit) => {
@@ -90,33 +90,22 @@ export const cartService = {
     setCart(updatedCart);
   },
 
-  fetchCart: async (user, setCart, setKits) => {
-    const userRef = doc(db, "users", user.uid);
-    const userData = await getDoc(userRef);
-    console.log(userData);
-
-    if (userData.exists()) {
-      const userCart = userData.data().userCart || [];
-      setCart(userCart);
+  fetchCart: async () => {
+    const user = auth.currentUser;
+  
+    if (!user) {
+      throw new Error("User is not authenticated.");
+    }
+  
+    const docRef = doc(db, "users", user.uid);
+    const docSnap = await getDoc(docRef);
+  
+    if (docSnap.exists()) {
+      const userCart = docSnap.data().userCart;
       console.log(userCart);
-
-      // Fetch the kit data for each kit in the cart
-      const kitData = {};
-      await Promise.all(
-        userCart.map(async (kitId) => {
-          const kitRef = doc(db, "shirts", kitId);
-          const kitDoc = await getDoc(kitRef);
-          if (kitDoc.exists()) {
-            kitData[kitId] = kitDoc.data();
-            console.log(kitData);
-          }
-        })
-      );
-      setKits(kitData);
-      console.log(kitData);
+      return userCart;
     } else {
-      setCart([]);
-      console.log(setCart);
+      throw new Error("User cart does not exist.");
     }
   },
 };
