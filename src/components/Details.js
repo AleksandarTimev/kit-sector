@@ -9,6 +9,7 @@ import "../public/css/Details.css";
 export const Details = () => {
   const [kit, setKit] = useState(null);
   const [user, setUser] = useState(null);
+  const [cart, setCart] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -28,6 +29,11 @@ export const Details = () => {
 
   const handleEditKit = (id) => {
     navigate(`/edit/${id}`);
+  };
+
+  const removeFromCart = async (kitId) => {
+    await cartService.removeFromCartHandler(kitId, user, setCart);
+    kitService.getKitById(id).then((data) => setKit(data));
   };
 
   return (
@@ -60,19 +66,35 @@ export const Details = () => {
           ) : null}
           {user && user.uid !== kit.userId ? (
             <div className="kit-buttons">
-              <button
-                type="button"
-                className="btn btn-secondary cart-btn"
-                onClick={() => cartService.addToCartHandler(kit.id, user, setKit)}
-              >
-                <img
-                  className="like-given border-0"
-                  src="https://cdn.pixabay.com/photo/2015/12/23/01/14/edit-1105049_960_720.png"
-                  alt="Cart"
-                  width="75"
-                  height="75"
-                />
-              </button>
+              {cart.find((item) => item.id === kit.id) ? (
+                <button
+                  type="button"
+                  className="btn btn-secondary cart-btn"
+                  onClick={() => removeFromCart(kit.id)}
+                >
+                  <img
+                    className="like-given border-0"
+                    src="https://icons.iconarchive.com/icons/graphicloads/100-flat/256/cart-remove-icon.png"
+                    alt="RemoveCart"
+                    width="75"
+                    height="75"
+                  />
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="btn btn-secondary cart-btn"
+                  onClick={() => cartService.addToCartHandler(kit.id, user, setCart, setKit)}
+                >
+                  <img
+                    className="like-given border-0"
+                    src="https://icons.iconarchive.com/icons/graphicloads/100-flat/256/cart-add-icon.png"
+                    alt="Cart"
+                    width="75"
+                    height="75"
+                  />
+                </button>
+              )}
               {kit.userLikes && kit.userLikes.includes(user.uid) ? (
                 <button
                   type="button"
@@ -83,8 +105,8 @@ export const Details = () => {
                 >
                   <img
                     className="like-given border-0"
-                    src="https://cdn-icons-png.flaticon.com/512/169/169776.png"
-                    alt="Like"
+                    src="https://icons.iconarchive.com/icons/graphicloads/flat-finance/256/dislike-icon.png"
+                    alt="Dislike"
                     width="75"
                     height="75"
                   />
@@ -97,8 +119,8 @@ export const Details = () => {
                 >
                   <img
                     className="like-given border-0"
-                    src="https://uxwing.com/wp-content/themes/uxwing/download/hand-gestures/like-button-icon.png"
-                    alt="Dislike"
+                    src="https://icons.iconarchive.com/icons/graphicloads/flat-finance/256/like-icon.png"
+                    alt="Like"
                     width="75"
                     height="75"
                   />

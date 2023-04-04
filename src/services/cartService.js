@@ -4,6 +4,7 @@ import { auth, db } from "../firebase";
 
 export const cartService = {
   addToCartHandler: async (kitId, user, setCart, setKit) => {
+    console.log(user)
     const userRef = doc(db, "users", user.uid);
     const userData = await getDoc(userRef);
     let userCart = [];
@@ -46,12 +47,13 @@ export const cartService = {
     // Fetch the updated kit data and update the kit state
     const updatedKitData = await kitService.getKitById(kitId);
     setKit(updatedKitData);
+    alert("Kit added to cart!");
   },
 
   removeFromCartHandler: async (kitId, user, setCart) => {
     const userRef = doc(db, "users", user.uid);
     const userData = await getDoc(userRef);
-
+  
     let userCart = [];
     if (userData.exists()) {
       const userDataObj = userData.data();
@@ -59,20 +61,22 @@ export const cartService = {
         userCart = userDataObj.userCart;
       }
     }
-
-    if (!userCart.includes(kitId)) {
+  
+    // Find the index of the kit in the userCart array
+    const index = userCart.findIndex((kit) => kit.id === kitId);
+    if (index === -1) {
       console.log("This item is not in your cart!");
       return;
     }
-
-    // Remove kitId from userCart array
-    const updatedUserCart = userCart.filter((id) => id !== kitId);
-
+  
+    // Remove the kit from the userCart array
+    userCart.splice(index, 1);
+  
     // Update Firestore document with new shopping cart data
     await updateDoc(userRef, {
-      userCart: updatedUserCart,
+      userCart: userCart,
     });
-
+  
     // Fetch the updated user data and set the cart state
     const updatedUserData = await getDoc(userRef);
     const updatedCart = updatedUserData.data().userCart || [];
@@ -91,7 +95,7 @@ export const cartService = {
   
     if (docSnap.exists()) {
       const userCart = docSnap.data().userCart;
-      console.log(userCart);
+      // console.log(userCart);
       return userCart;
     } else {
       throw new Error("User cart does not exist.");
