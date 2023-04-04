@@ -89,7 +89,7 @@ export const Details = () => {
                   <img
                     className="like-given border-0"
                     src="https://icons.iconarchive.com/icons/graphicloads/100-flat/256/cart-add-icon.png"
-                    alt="Cart"
+                    alt="AddCart"
                     width="75"
                     height="75"
                   />

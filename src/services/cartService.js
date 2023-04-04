@@ -1,4 +1,4 @@
-import { doc, updateDoc, getDoc, setDoc } from "firebase/firestore";
+import { doc, updateDoc, getDoc, setDoc, collection, addDoc } from "firebase/firestore";
 import { kitService } from "./kitService.js";
 import { auth, db } from "../firebase";
 
@@ -81,6 +81,7 @@ export const cartService = {
     const updatedUserData = await getDoc(userRef);
     const updatedCart = updatedUserData.data().userCart || [];
     setCart(updatedCart);
+    alert("Kit removed from cart!");
   },
 
   fetchCart: async () => {
@@ -102,7 +103,37 @@ export const cartService = {
     }
   },
 
-  orderHandled: () => {
-    alert("Your order has been confirmed!")
+  orderHandled: async (user, setCart) => {
+    const userRef = doc(db, "users", user.uid);
+    const userDoc = await getDoc(userRef);
+  
+    const userCart = userDoc.data().userCart || [];
+
+    if (userCart.length === 0) {
+      alert("Cart is empty!");
+      return;
+    }
+  
+    try {
+      const ordersRef = collection(db, "orders");
+      const orderDoc = await addDoc(ordersRef, {
+        userId: user.uid,
+        kitIds: userCart.map((kit) => kit.id),
+        orderDate: new Date(),
+      });
+      console.log("Order document written with ID: ", orderDoc.id);
+    } catch (error) {
+      console.error("Error adding order document: ", error);
+    }
+  
+    // Clear the user's cart
+    await updateDoc(userRef, {
+      userCart: [],
+    });
+  
+    // Update the cart state
+    setCart([]);
+  
+    alert("Your order has been confirmed!");
   }
 };

@@ -93,7 +93,7 @@ export function Cart() {
             </tr>
           </tbody>
         </table>
-        <button className="btn" onClick={()=> cartService.orderHandled()}>Checkout</button>
+        <button className="btn" onClick={()=> cartService.orderHandled(user, setCart)}>Checkout</button>
       </div>
     </div>
   );
