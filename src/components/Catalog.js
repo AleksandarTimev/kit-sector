@@ -7,6 +7,8 @@ import "../public/css/Catalog.css";
 export const Catalog = () => {
   const [kits, setKits] = useState([]);
   const [user, setUser] = useState(null);
+  console.log(user);
+  const [searchQuery, setSearchQuery] = useState("");
   const loading = useState(true);
   const navigate = useNavigate();
 
@@ -24,41 +26,49 @@ export const Catalog = () => {
     };
   }, []);
 
-  console.log("user", user);
+  const filteredKits = kits.filter((kit) =>
+    kit.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleSearch = (e) => setSearchQuery(e.target.value);
 
   return (
-<div className="container">
-  <h1 className="h-one">Catalog</h1>
-  {kits.length === 0 ? (
-    <div className="center">
-      {loading ? (
-        <p>Loading...</p>
+    <div className="container">
+      <h1 className="h-one">Catalog</h1>
+      <div className="search-box">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchQuery}
+          onChange={handleSearch}
+        />
+      </div>
+      {filteredKits.length === 0 ? (
+        <div className="center">
+          {loading && !searchQuery ? <p>Loading...</p> : <p>No kits found!</p>}
+        </div>
       ) : (
-        <p>No kits uploaded yet. Be the first to upload one!</p>
+        <ul className="kits-grid">
+          {filteredKits.map((kit) => (
+            <li className="kit-details li-catalog" key={kit.id}>
+              <div>
+                <h4>{kit.name}</h4>
+                <img src={kit.imageUrl} alt={kit.name} />
+              </div>
+              <div className="kit-buttons">
+                <button
+                  type="button"
+                  className="btn btn-secondary mx-2"
+                  onClick={() => kitService.handleDetailsKit(kit.id, navigate)}
+                >
+                  Details
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
-  ) : (
-    <ul className="kits-grid">
-      {kits.map((kit) => (
-        <li className="kit-details li-catalog" key={kit.id}>
-          <div>
-            <h4>{kit.name}</h4>
-            <img src={kit.imageUrl} alt={kit.name} />
-          </div>
-          <div className="kit-buttons">
-            <button
-              type="button"
-              className="btn btn-secondary mx-2"
-              onClick={() => kitService.handleDetailsKit(kit.id, navigate)}
-            >
-              Details
-            </button>
-          </div>
-        </li>
-      ))}
-    </ul>
-  )}
-</div>
   );
 };
 

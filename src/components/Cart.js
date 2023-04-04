@@ -9,6 +9,7 @@ export function Cart() {
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const authListener = auth.onAuthStateChanged((user) => {
@@ -18,14 +19,17 @@ export function Cart() {
           .fetchCart(user.uid)
           .then((cart) => {
             setCart(cart);
+            setLoading(false);
           })
           .catch((error) => {
             console.log(error);
+            setLoading(false);
           });
       } else {
         setUser(null);
         navigate("/404");
         setCart([]);
+        setLoading(false);
       }
     });
 
@@ -57,8 +61,10 @@ export function Cart() {
         />
         {user && <p>Email: {user.email}</p>}
       </div>
-      <div className="profile-kits">
-        {cart.length === 0 ? (
+      <div className="cart-kits">
+        {loading ? (
+          <p>Loading...</p>
+        ) : cart.length === 0 ? (
           <p>Your cart is empty!</p>
         ) : (
           <table>

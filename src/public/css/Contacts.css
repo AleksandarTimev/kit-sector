@@ -32,6 +32,13 @@
     .wrapper-contacts {
       display: block;
     }
+
+    .container-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
   }
   
   .contact-us {
