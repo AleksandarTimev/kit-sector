@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../public/css/Home.css";
 
 export const Home = () => {
@@ -7,9 +8,9 @@ export const Home = () => {
       <div className="hero-content">
         <h1>Welcome to Kit Sector</h1>
         <p>Discover our wide range of football kits and extend their life!</p>
-        <a href="/catalog" className="btn">
+        <Link className="btn" to="/catalog">
           Explore Now
-        </a>
+        </Link>
       </div>
     </section>
   );

@@ -14,12 +14,14 @@ export function Cart() {
     const authListener = auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
-        cartService.fetchCart(user.uid).then((cart) => {
-          setCart(cart);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+        cartService
+          .fetchCart(user.uid)
+          .then((cart) => {
+            setCart(cart);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       } else {
         setUser(null);
         navigate("/404");
@@ -41,7 +43,7 @@ export function Cart() {
 
   const removeFromCart = async (kitId) => {
     await cartService.removeFromCartHandler(kitId, user, setCart);
-  }
+  };
 
   return (
     <div className="container">
@@ -56,44 +58,64 @@ export function Cart() {
         {user && <p>Email: {user.email}</p>}
       </div>
       <div className="profile-kits">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Kit</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cart.map((kit) => (
-              <tr key={kit.id}>
-                <td>
-                  <Link className="row-cart" to={`/details/${kit.id}`}>
-                    {kit.name}
-                  </Link>
-                </td>
-                <td className="row-cart">{kit.description}</td>
-                <td className="row-cart">${kit.price}</td>
-                <td className="row-cart">
-                  <img className="img-cart" src={kit.imageUrl} alt={kit.name} />
-                </td>
-                <td>
-                  <button className="btn btn-danger" onClick={() => removeFromCart(kit.id)}>Remove</button>
-                </td>
+        {cart.length === 0 ? (
+          <p>Your cart is empty!</p>
+        ) : (
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Kit</th>
+                <th>Actions</th>
               </tr>
-            ))}
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td className="total-price-text">Total Price:</td>
-              <td className="total-price-value">${totalPrice}</td>
-            </tr>
-          </tbody>
-        </table>
-        <button className="btn" onClick={()=> cartService.orderHandled(user, setCart)}>Checkout</button>
+            </thead>
+            <tbody>
+              {cart.map((kit) => (
+                <tr key={kit.id}>
+                  <td>
+                    <Link className="row-cart" to={`/details/${kit.id}`}>
+                      {kit.name}
+                    </Link>
+                  </td>
+                  <td className="row-cart">{kit.description}</td>
+                  <td className="row-cart">${kit.price}</td>
+                  <td className="row-cart">
+                    <img
+                      className="img-cart"
+                      src={kit.imageUrl}
+                      alt={kit.name}
+                    />
+                  </td>
+                  <td>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => removeFromCart(kit.id)}
+                    >
+                      Remove
+                    </button>
+                  </td>
+                </tr>
+              ))}
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td className="total-price-text">Total Price:</td>
+                <td className="total-price-value">${totalPrice}</td>
+              </tr>
+            </tbody>
+          </table>
+        )}
+        {cart.length === 0 ? null : (
+          <button
+            className="btn"
+            onClick={() => cartService.orderHandled(user, setCart)}
+          >
+            Checkout
+          </button>
+        )}
       </div>
     </div>
   );
