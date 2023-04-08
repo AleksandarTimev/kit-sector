@@ -23,7 +23,7 @@ export const Catalog = () => {
     return () => {
       authListener();
     };
-  }, []);
+  }, [setUser]);
 
   const filteredKits = kits.filter((kit) =>
     kit.name.toLowerCase().includes(searchQuery.toLowerCase())
