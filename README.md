@@ -1,3 +1,18 @@
+--- Project description ---
+
+# Technologies used
+
+The kit sector web app is a component-based web app build with the React.js framework, Bootstrap, HTML5 and CSS3. The react hooks are heavily used throughout the app, most commonly for validation of user authentication state, as I did not do it with context API(left for future development). The project uses firebase as a backend solution. The app utilizes the firestore db, authentication and storage services of firebase. The project has also been deployed to firebase (https://sellyourfootballshirt.web.app/). Google fonts have been implemented as well as the open-source Openstreet map API for the contacts page. I have used the built-in browser alert and prompts for displaying errors instead of creating a separate UI elements and utilizing the react.js state management or contexts(left for future development). Routing is implemented thanks to the react-router-dom JS library.
+
+# Public section
+
+The app has a public and a private section. The public section is accessible for all users regardless of their state of authentication. An unathenticated user can browse through the catalog and check detais for all products in the catalog. They can also check the home page, the contacts page, as well as the register and login pages. If the user tries to access a page they are not authorized for they would be redirected to the app's 404 page.
+
+# Private section
+
+The private section and functionality is only accessible after a user has logged-in or registered to the website via the authentication pages. After registration/log-in the user is redirected to the home page. A logged-in user has access to several more views such as a user profile page, where all uploaded kits by the user appear. A cart view where the user is able to see all kits they have added to their cart. Apart from the details, a logged in user can like and add other users' kits to their cart for purchasing. If the user is the owner of the given kit they have the ability to delete or edit the record. I have used both server(firebase rules) and client-side data validation in order to make sure that non-authorized users can edit records that do not belong to them. 
+
+--------------------------------------------------------------------------
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
