@@ -105,17 +105,20 @@ handleEditSubmit: async (event, id, name, description, price, condition, image, 
   }
 },
 
-  handleDeleteKit: async (id, navigate) => {
-    try {
+handleDeleteKit: async (id, navigate) => {
+  try {
+    const confirmDelete = window.confirm("Are you sure you want to delete this kit?");
+    if (confirmDelete) {
       const kit = doc(db, "shirts", id);
       await deleteDoc(kit);
       alert("Kit deleted successfully!");
       navigate("/catalog");
-    } catch (err) {
-      console.log(err)
-      alert("Could not delete kit!");
     }
-  },
+  } catch (err) {
+    console.log(err);
+    alert("Could not delete kit!");
+  }
+},
 
   useEditKit: () => {
     const [kitId, setKitId] = useState(null);
