@@ -78,7 +78,10 @@ handleEditSubmit: async (event, id, name, description, price, condition, image, 
     const kitData = kit.data();
     let imageUrl = kitData.imageUrl;
     const likes = kitData.likes;
-    const userLikes = kitData.userLikes;
+    let userLikes = kitData.userLikes;
+    if (userLikes === undefined) {
+        userLikes = 0;
+    }
     console.log(userLikes);
 
     if (image !== null) {
