@@ -6,13 +6,17 @@ import "../public/css/Catalog.css";
 
 export const Catalog = () => {
   const [kits, setKits] = useState([]);
-  const setUser = useState(null);
+  const [user, setUser] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const loading = useState(true);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    kitService.getKits().then((data) => setKits(data));
+    kitService.getKits().then((data) => {
+      setKits(data);
+      setLoading(false);
+    });
+
     const authListener = auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
@@ -20,6 +24,7 @@ export const Catalog = () => {
         setUser(null);
       }
     });
+
     return () => {
       authListener();
     };
