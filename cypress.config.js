@@ -15,4 +15,6 @@ module.exports = defineConfig({
       bundler: "webpack",
     },
   },
+
+  baseUrl: "http://localhost:3000" // Add this line to set the base URL
 });
