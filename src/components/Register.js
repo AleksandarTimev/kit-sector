@@ -21,10 +21,10 @@ export const RegisterForm = () => {
   return (
     <div>
       <form onSubmit={handleSubmit} className="container-form">
-      <div className="heading-one">
+      <div className="heading-one" data-cy="cy-register">
         <h1>Register</h1>
       </div>
-        <div className="form-group">
+        <div className="form-group" data-cy="cy-email">
           <label className="navbar-nav ml-auto" htmlFor="username">
             Email
           </label>
@@ -37,7 +37,7 @@ export const RegisterForm = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group" data-cy="cy-pass">
           <label className="navbar-nav ml-auto" htmlFor="password">
             Password
           </label>
@@ -50,7 +50,7 @@ export const RegisterForm = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group" data-cy="cy-pass-confirm">
           <label className="navbar-nav ml-auto" htmlFor="confirmPassword">
             Confirm Password
           </label>
@@ -70,20 +70,21 @@ export const RegisterForm = () => {
           <select
             className="form-control"
             id="gender"
+            data-cy="cy-gender"
             value={gender}
             onChange={(e) => setGender(e.target.value)}
             required
           >
             <option value="">Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
+            <option value="male" data-cy="cy-g-male">Male</option>
+            <option value="female" data-cy="cy-g-female">Female</option>
+            <option value="other" data-cy="cy-g-other">Other</option>
           </select>
         </div>
-        <button type="submit" className="btn btn-primary register">
+        <button type="submit" className="btn btn-primary register" data-cy="cy-submit">
           Register
         </button>
-        <p className="mt-3 text-center">
+        <p className="mt-3 text-center" data-cy="cy-login">
           Already have an account? <Link to="/login">Login</Link>
         </p>
       </form>
