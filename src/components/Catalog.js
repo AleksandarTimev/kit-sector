@@ -6,7 +6,7 @@ import "../public/css/Catalog.css";
 
 export const Catalog = () => {
   const [kits, setKits] = useState([]);
-  const [user, setUser] = useState(null);
+  const [, setUser] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
