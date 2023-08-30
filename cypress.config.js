@@ -7,6 +7,7 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
+    baseUrl: "http://localhost:3000" // Set base URL for e2e testing
   },
 
   component: {
@@ -15,6 +16,4 @@ module.exports = defineConfig({
       bundler: "webpack",
     },
   },
-
-  baseUrl: "http://localhost:3000" // Add this line to set the base URL
 });
