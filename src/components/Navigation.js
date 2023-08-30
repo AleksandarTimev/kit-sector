@@ -74,7 +74,7 @@ export const Navbar = () => {
                   </Link>
                 </li>
                 <li onClick={logout} className="nav-item">
-                    <Link className="nav-link log-out" to="/">
+                    <Link className="nav-link log-out" data-cy="cy-logout" to="/">
                       Log Out
                     </Link>
                 </li>

@@ -1,14 +1,14 @@
 describe("Register Page", () => {
   const uuid = () => Cypress._.random(0, 1e4);
   const id = uuid();
-  const testname = `Person${id}@abv.bg`;
+  const email = `Person${id}@abv.bg`;
   const pass = "p@s$w0rd!";
 
   it("User able to fill form and register", () => {
     cy.visit("/register");
 
     cy.get("[data-cy=cy-email]").should("be.visible").contains("Email");
-    cy.get("[data-cy=cy-email]").type(testname);
+    cy.get("[data-cy=cy-email]").type(email);
 
     cy.get("[data-cy=cy-pass]").should("be.visible").contains("Password");
     cy.get("[data-cy=cy-pass]").type(pass);
@@ -37,7 +37,9 @@ describe("Register Page", () => {
 
   it("user should land on home page", () => {
     cy.visit("/");
-    cy.get(".hero-content h1").should("be.visible").contains("Welcome to Kit Sector");
-    cy.get("a.nav-link").contains("Log Out");
+    cy.get(".hero-content h1")
+      .should("be.visible")
+      .contains("Welcome to Kit Sector");
+    cy.get("[data-cy=cy-logout]").contains("Log Out");
   });
 });

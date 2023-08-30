@@ -26,7 +26,7 @@ export const LoginForm = () => {
     <div>
     <form className="container-form" onSubmit={handleSubmit} >
     <h1>Login</h1>
-      <div className="form-group">
+      <div className="form-group" data-cy="cy-email-login">
         <label htmlFor="email">Email</label>
         <input
           type="text"
@@ -37,7 +37,7 @@ export const LoginForm = () => {
           required
         />
       </div>
-      <div className="form-group">
+      <div className="form-group" data-cy="cy-pass-login">
         <label htmlFor="password">Password</label>
         <input
           type="password"
@@ -48,7 +48,7 @@ export const LoginForm = () => {
           required
         />
       </div>
-      <button type="submit" className="btn btn-primary login">
+      <button type="submit" className="btn btn-primary login" data-cy="cy-submit-login">
         Login
       </button>
       <p className="mt-3 text-center">
