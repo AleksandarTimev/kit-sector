@@ -15,6 +15,10 @@ describe("Login Page", () => {
       .should("be.visible")
       .contains("Login")
       .click();
+
+    cy.wait(1000);
+
+    cy.get("body").type("{enter}");
   });
 
   it("user should land on home page", () => {

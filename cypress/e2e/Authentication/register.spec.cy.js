@@ -33,6 +33,10 @@ describe("Register Page", () => {
       });
 
     cy.get("[data-cy=cy-submit]").should("be.visible").click();
+    
+    cy.wait(1000);
+
+    cy.get("body").type("{enter}");
   });
 
   it("user should land on home page", () => {
