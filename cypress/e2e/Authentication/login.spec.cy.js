@@ -1,4 +1,4 @@
-describe("Register Page", () => {
+describe("Login Page", () => {
   const email = "dsa@dsa.bg";
   const pass = "dsadsa";
 
