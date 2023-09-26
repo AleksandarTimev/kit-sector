@@ -55,8 +55,8 @@ export const Catalog = () => {
         <ul className="kits-grid">
           {filteredKits.map((kit) => (
             <li className="kit-details li-catalog" key={kit.id}>
-              <div>
-                <h4>{kit.name}</h4>
+              <div className="kit-pic-name">
+                <h4 data-cy="cy-kit-name">{kit.name}</h4>
                 <img src={kit.imageUrl} alt={kit.name} />
               </div>
               <div className="kit-buttons">

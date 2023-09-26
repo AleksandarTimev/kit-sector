@@ -40,7 +40,7 @@ export const Details = () => {
     <div className="container">
       {kit ? (
         <div className="li-catalog">
-          <h1>{kit.name}</h1>
+          <h1  data-cy="cy-kit-name-details">{kit.name}</h1>
           <img src={kit.imageUrl} alt={kit.name} width="600" height="600" />
           <p>Price: ${kit.price}</p>
           <p>Condition: {kit.condition}</p>
