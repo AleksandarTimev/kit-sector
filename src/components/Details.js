@@ -68,12 +68,13 @@ export const Details = () => {
             <div className="kit-buttons">
               {cart.find((item) => item.id === kit.id) ? (
                 <button
+                  data-cy="cy-remove-btn"
                   type="button"
                   className="btn btn-secondary cart-btn"
                   onClick={() => removeFromCart(kit.id)}
                 >
                   <img
-                    className="like-given border-0"
+                    className="cart-remove border-0"
                     src="https://icons.iconarchive.com/icons/graphicloads/100-flat/256/cart-remove-icon.png"
                     alt="RemoveCart"
                     width="75"
@@ -82,12 +83,13 @@ export const Details = () => {
                 </button>
               ) : (
                 <button
+                  data-cy="cy-cart-btn"
                   type="button"
                   className="btn btn-secondary cart-btn"
                   onClick={() => cartService.addToCartHandler(kit.id, user, setCart, setKit)}
                 >
                   <img
-                    className="like-given border-0"
+                    className="cart-add border-0"
                     src="https://icons.iconarchive.com/icons/graphicloads/100-flat/256/cart-add-icon.png"
                     alt="AddCart"
                     width="75"
@@ -97,6 +99,7 @@ export const Details = () => {
               )}
               {kit.userLikes && kit.userLikes.includes(user.uid) ? (
                 <button
+                  data-cy="cy-dislike-btn"
                   type="button"
                   className="btn btn-danger"
                   onClick={() =>
@@ -104,7 +107,7 @@ export const Details = () => {
                   }
                 >
                   <img
-                    className="like-given border-0"
+                    className="dislike-given border-0"
                     src="https://icons.iconarchive.com/icons/graphicloads/flat-finance/256/dislike-icon.png"
                     alt="Dislike"
                     width="75"
@@ -113,6 +116,7 @@ export const Details = () => {
                 </button>
               ) : (
                 <button
+                  data-cy="cy-like-btn"
                   type="button"
                   className="btn btn-success"
                   onClick={() => likeService.likeHandler(kit.id, user, setKit)}

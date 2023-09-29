@@ -61,13 +61,67 @@ describe("Catalog Actions", () => {
 
             // Check if the user is redirected to a URL that matches the pattern "/details/{sth}"
             cy.url().should("match", /\/details\/.+/);
-            
+
+            // Extract the currentKitId from the URL
+            cy.url().then((url) => {
+              const match = url.match(/\/details\/(.+)/);
+              const currentKitId = match && match[1];
+
+              // Save the currentKitId as a Cypress environment variable
+              Cypress.env("currentKitId", currentKitId);
+            });
+
             // Check if '.kit-pic-name h4' matches the "data-cy=cy-kit-name-details"
             cy.get(".container .li-catalog h1")
               .should("be.visible")
               .invoke("text");
             // .should('eq', this.kitName); // Use the 'kitName' alias here
           });
+      });
+  });
+
+  it("user is able to click cart and like buttons", () => {
+    const currentKitId = Cypress.env("currentKitId");
+
+    cy.visit(`/details/${currentKitId}`);
+
+    cy.get("[data-cy=cy-cart-btn]")
+      .should("be.visible")
+      .within(() => {
+        cy.get("img.cart-add.border-0").should("exist");
+      })
+      .click();
+
+    cy.wait(2500);
+
+    cy.get("[data-cy=cy-like-btn]")
+      .should("be.visible")
+      .within(() => {
+        cy.get("img.like-given.border-0").should("exist");
+      })
+      .click();
+
+    cy.wait(2500);
+
+    cy.get("[data-cy=cy-dislike-btn]").should("be.visible");
+    cy.get("[data-cy=cy-remove-btn]").should("be.visible");
+  });
+
+  it("should remove all cart entries", () => {
+    cy.visit(`/cart`);
+
+    cy.get("[data-cy=cy-remove-item]").each(($button) => {
+      if ($button.text().includes("Remove")) {
+        cy.wrap($button).click();
+      }
+    });
+
+    cy.wait(3000);
+
+    cy.get(".cart-kits")
+      .should("exist")
+      .within(() => {
+        cy.get("p").contains("Your cart is empty!").should("exist");
       });
   });
 });
