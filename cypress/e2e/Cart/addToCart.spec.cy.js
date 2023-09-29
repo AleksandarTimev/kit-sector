@@ -90,7 +90,7 @@ describe("Catalog Actions", () => {
       .within(() => {
         cy.get("img.cart-add.border-0").should("exist");
       })
-      .click();
+      .click(); 
 
     cy.wait(2500);
 
@@ -116,7 +116,7 @@ describe("Catalog Actions", () => {
       }
     });
 
-    cy.wait(3000);
+    cy.wait(2000);
 
     cy.get(".cart-kits")
       .should("exist")
