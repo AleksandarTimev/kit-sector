@@ -61,7 +61,7 @@ export function Cart() {
         />
         {user && <p>Email: {user.email}</p>}
       </div>
-      <div className="cart-kits" data-cy="cy-cart">
+      <div className="cart-kits">
         {loading ? (
           <p>Loading...</p>
         ) : cart.length === 0 ? (
@@ -96,7 +96,6 @@ export function Cart() {
                   </td>
                   <td>
                     <button
-                      data-cy="cy-remove-item"
                       className="btn btn-danger"
                       onClick={() => removeFromCart(kit.id)}
                     >

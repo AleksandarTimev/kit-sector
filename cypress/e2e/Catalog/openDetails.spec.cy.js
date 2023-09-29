@@ -57,11 +57,14 @@ describe("Catalog Actions", () => {
             // Click the details button inside the selected li item
             cy.wrap(randomListItem)
               .find(".kit-buttons button.btn.btn-secondary.mx-2")
+              .then((kitId) => {
+                Cypress.env("kitId", kitId);
+              })
               .click();
 
             // Check if the user is redirected to a URL that matches the pattern "/details/{sth}"
             cy.url().should("match", /\/details\/.+/);
-            
+
             // Check if '.kit-pic-name h4' matches the "data-cy=cy-kit-name-details"
             cy.get(".container .li-catalog h1")
               .should("be.visible")
@@ -70,4 +73,15 @@ describe("Catalog Actions", () => {
           });
       });
   });
+
+  // it("user is able to click cart and like buttons", () => {
+  //   const kitId = Cypress.env("kitId");
+
+  //   console.log("kitId:", kitId);
+  //   // Construct the URL with the kit ID
+  //   const detailsUrl = `/details/${kitId}`;
+
+  //   // Visit the URL with the kit ID
+  //   cy.visit(detailsUrl);
+  // });
 });
