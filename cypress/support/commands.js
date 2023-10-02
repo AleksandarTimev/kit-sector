@@ -23,3 +23,37 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+// Custom commands to get an element using the data-cy attribute
+Cypress.Commands.add("dataCy", (value) => {
+  return cy.get(`[data-cy=${value}]`);
+});
+
+// Custom command for user is able to login succesfully
+Cypress.Commands.add("loginCommand", () => {
+  const email = "dsa@dsa.bg";
+  const pass = "dsadsa";
+
+  cy.visit("/login");
+
+  cy.dataCy("cy-email-login").should("be.visible").contains("Email");
+  cy.dataCy("cy-email-login").type(email);
+
+  cy.dataCy("cy-pass-login").should("be.visible").contains("Password");
+  cy.dataCy("cy-pass-login").type(pass);
+
+  cy.dataCy("cy-submit-login").should("be.visible").contains("Login").click();
+
+  cy.wait(1000);
+
+  cy.get("body").type("{enter}");
+});
+
+// Custom command for user landing on Home Page
+Cypress.Commands.add("homePageLanding", () => {
+  cy.visit("/");
+  cy.get(".hero-content h1")
+    .should("be.visible")
+    .contains("Welcome to Kit Sector");
+  cy.dataCy("cy-logout").contains("Log Out");
+});
