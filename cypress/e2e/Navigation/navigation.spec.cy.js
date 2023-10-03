@@ -14,7 +14,7 @@ describe("Navigation Page", () => {
     "Upload",
     "My Profile",
     "My Cart",
-    // "Log Out"
+    "Log Out",
   ];
 
   beforeEach(() => {
@@ -47,12 +47,22 @@ describe("Navigation Page", () => {
 
   it("Should hover over navigation links with a class (logged in)", () => {
     cy.wait(1500);
+
     navigationLinksIn.forEach((linkText) => {
-      cy.get("a.nav-link")
-        .contains(linkText)
-        .trigger("mouseover")
-        .should("have.css", "color", "rgba(0, 0, 0, 0.5)")
-        .click();
+      const linkSelector = "a.nav-link";
+
+      if (linkText === "Log Out") {
+        cy.get(linkSelector)
+          .contains(linkText)
+          .trigger("mouseover")
+          .should("have.css", "background-color", "rgb(245, 215, 215)")
+      } else {
+        cy.get(linkSelector)
+          .contains(linkText)
+          .trigger("mouseover")
+          .should("have.css", "color", "rgba(0, 0, 0, 0.5)")
+          .click();
+      }
     });
   });
 
@@ -61,5 +71,9 @@ describe("Navigation Page", () => {
       .trigger("mouseover")
       .should("have.css", "color", "rgba(0, 0, 0, 0.5)")
       .click();
+
+    cy.wait(2000);
+
+    cy.dataCy("cy-login-btn").should("be.visible");
   });
 });
