@@ -75,5 +75,6 @@ describe("Navigation Page", () => {
     cy.wait(2000);
 
     cy.dataCy("cy-login-btn").should("be.visible");
+    cy.dataCy("cy-register-btn").should("be.visible");
   });
 });

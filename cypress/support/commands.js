@@ -44,9 +44,9 @@ Cypress.Commands.add("loginCommand", () => {
 
   cy.dataCy("cy-submit-login").should("be.visible").contains("Login").click();
 
-  cy.wait(1000);
-
   cy.get("body").type("{enter}");
+  
+  cy.wait(3000);
 });
 
 // Custom command for user landing on Home Page

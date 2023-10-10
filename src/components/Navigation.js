@@ -86,7 +86,7 @@ export const Navbar = () => {
                     Login
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li data-cy="cy-register-btn" className="nav-item">
                   <Link className="nav-link" to="/register">
                     Register
                   </Link>
