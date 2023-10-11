@@ -59,17 +59,17 @@ export const Navbar = () => {
             {user ? (
               <>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/upload">
+                  <Link className="nav-link" to="/upload" data-cy="cy-upload-kit">
                     Upload
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/profile">
+                  <Link className="nav-link" to="/profile" data-cy="cy-profile">
                     My Profile
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/cart">
+                  <Link className="nav-link" to="/cart" data-cy="cy-cart">
                     My Cart
                   </Link>
                 </li>

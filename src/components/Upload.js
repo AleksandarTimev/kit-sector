@@ -47,6 +47,7 @@ export const UploadForm = () => {
           type="text"
           id="name"
           className="form-control"
+          data-cy="cy-upload-name"
           placeholder="Real Madrid Home 19/20"
           value={name}
           onChange={(event) => kitService.handleNameChange(event, setName)}
@@ -61,6 +62,7 @@ export const UploadForm = () => {
           type="text"
           id="description"
           className="form-control"
+          data-cy="cy-upload-description"
           placeholder="Description here..."
           value={description}
           onChange={(event) =>
@@ -77,6 +79,7 @@ export const UploadForm = () => {
           type="number"
           id="price"
           className="form-control"
+          data-cy="cy-upload-price"
           placeholder="Set a price"
           value={price}
           onChange={(event) => kitService.handlePriceChange(event, setPrice)}
@@ -92,14 +95,15 @@ export const UploadForm = () => {
             kitService.handleConditionChange(event, setCondition)
           }
           className="form-control"
+          data-cy="cy-upload-condition"
           required
         >
           <option value="">Select Condition</option>
-          <option value="New">New</option>
-          <option value="Old">Old</option>
+          <option value="New" data-cy="cy-upload-condition-new">New</option>
+          <option value="Old" data-cy="cy-upload-condition-old">Old</option>
         </select>
       </div>
-      <div className="form-group">
+      <div className="form-group" data-cy="cy-upload-image">
         <label className="navbar-nav ml-auto" htmlFor="image">
           Image
         </label>
@@ -111,7 +115,7 @@ export const UploadForm = () => {
           required
         />
       </div>
-      <button type="submit" className="btn btn-primary register">
+      <button type="submit" className="btn btn-primary register" data-cy="cy-upload-btn">
         Upload
       </button>
     </form>

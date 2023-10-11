@@ -57,3 +57,13 @@ Cypress.Commands.add("homePageLanding", () => {
     .contains("Welcome to Kit Sector");
   cy.dataCy("cy-logout").contains("Log Out");
 });
+
+//Custom command for checking text in outer HTML tag
+Cypress.Commands.add("shouldContainOuterInParent", { prevSubject: true }, (subject, text) => {
+  cy.wrap(subject).parent().should(($parent) => {
+    const outerHtml = $parent[0].outerHTML;
+    expect(outerHtml).to.include(text);
+  });
+});
+
+//Custom command for attaching a kit
