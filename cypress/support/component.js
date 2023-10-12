@@ -15,7 +15,6 @@
 
 // Import commands.js using ES2015 syntax:
 import "./commands";
-import "cypress-file-upload";
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
@@ -23,18 +22,6 @@ import "cypress-file-upload";
 import { mount } from "cypress/react18";
 
 Cypress.Commands.add("mount", mount);
-
-Cypress.Commands.add("upload_file", (fileName, fileType = " ", selector) => {
-  cy.get(selector).then((subject) => {
-    cy.fixture(fileName, "base64").then((content) => {
-      const el = subject[0];
-      const testFile = new File([content], fileName, { type: fileType });
-      const dataTransfer = new DataTransfer();
-      dataTransfer.items.add(testFile);
-      el.files = dataTransfer.files;
-    });
-  });
-});
 
 // Example use:
 // cy.mount(<MyComponent />)

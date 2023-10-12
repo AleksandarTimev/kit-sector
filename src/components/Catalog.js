@@ -63,6 +63,7 @@ export const Catalog = () => {
                 <button
                   type="button"
                   className="btn btn-secondary mx-2"
+                  data-cy="cy-details-button"
                   onClick={() => kitService.handleDetailsKit(kit.id, navigate)}
                 >
                   Details

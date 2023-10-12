@@ -50,6 +50,7 @@ export const Details = () => {
             <div className="kit-buttons">
               <button
                 type="button"
+                data-cy="cy-delete-btn"
                 className="btn btn-secondary mx-2"
                 onClick={() => kitService.handleDeleteKit(kit.id, navigate)}
               >
@@ -57,6 +58,7 @@ export const Details = () => {
               </button>
               <button
                 type="button"
+                data-cy="cy-edit-btn"
                 className="btn btn-primary"
                 onClick={() => handleEditKit(kit.id)}
               >

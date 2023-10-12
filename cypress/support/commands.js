@@ -59,7 +59,7 @@ Cypress.Commands.add("homePageLanding", () => {
 });
 
 //Custom command for checking text in outer HTML tag
-Cypress.Commands.add("shouldContainOuterInParent", { prevSubject: true }, (subject, text) => {
+Cypress.Commands.add("containsInOuterHtml", { prevSubject: true }, (subject, text) => {
   cy.wrap(subject).parent().should(($parent) => {
     const outerHtml = $parent[0].outerHTML;
     expect(outerHtml).to.include(text);
