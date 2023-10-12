@@ -50,10 +50,9 @@ describe("Catalog Actions", () => {
     });
 
     cy.dataCy("cy-upload-image").selectFile("cypress/fixtures/nufc_home.jpg");
-
     cy.dataCy("cy-upload-btn").should("be.visible").contains("Upload").click();
 
-    cy.wait(7000);
+    cy.url().should("include", "/catalog");
 
     Cypress.env("currentKitName", kitName);
   });
@@ -86,6 +85,7 @@ describe("Catalog Actions", () => {
       .contains(currentKitName);
   
     cy.get(".container .kit-buttons [data-cy='cy-delete-btn']").click();
-    cy.visit("/catalog");
+
+    cy.url().should("include", "/catalog");
   });
 });
