@@ -1,7 +1,8 @@
 describe("Catalog Actions", () => {
-  const kitName = "Random Kit" + Cypress._.random(0, 5000);
+  const timestamp = new Date().getTime();
+  const kitName = `Newcastle Home Kit ${timestamp}`;
   const desc =
-    "Lorem ipsum dolor sit amet con el met dolor, consectetur adipiscing elit";
+    "Lorem ipsum dolor sit amet con el met dolor";
   const price = Cypress._.random(1, 99);
 
   it("User able to login", () => {
@@ -48,7 +49,15 @@ describe("Catalog Actions", () => {
       cy.dataCy("cy-upload-condition").select(randomOption);
     });
 
-    cy.dataCy("cy-upload-image").click();
-    cy.dataCy("cy-upload-btn").should("be.visible").contains("Upload");
+    cy.dataCy("cy-upload-image")
+    .selectFile('cypress/fixtures/nufc_home.jpg')
+
+    cy.dataCy("cy-upload-btn").should("be.visible").contains("Upload").click();
+
+    cy.wait(7000);
   });
+
+  // it("User able to see new kit in catalog", () => {
+    
+  // });
 });

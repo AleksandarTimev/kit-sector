@@ -65,5 +65,3 @@ Cypress.Commands.add("shouldContainOuterInParent", { prevSubject: true }, (subje
     expect(outerHtml).to.include(text);
   });
 });
-
-//Custom command for attaching a kit

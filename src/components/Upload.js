@@ -103,7 +103,7 @@ export const UploadForm = () => {
           <option value="Old" data-cy="cy-upload-condition-old">Old</option>
         </select>
       </div>
-      <div className="form-group" data-cy="cy-upload-image">
+      <div className="form-group" >
         <label className="navbar-nav ml-auto" htmlFor="image">
           Image
         </label>
@@ -111,6 +111,7 @@ export const UploadForm = () => {
           type="file"
           id="image"
           className="form-control"
+          data-cy="cy-upload-image"
           onChange={(event) => kitService.handleImageChange(event, setImage)}
           required
         />
