@@ -70,6 +70,7 @@ export const Profile = () => {
                 <div className="kit-buttons">
                   <button
                     type="button"
+                    data-cy="cy-details-button-profile"
                     className="btn btn-secondary mx-2"
                     onClick={() =>
                       kitService.handleDetailsKit(kit.id, navigate)

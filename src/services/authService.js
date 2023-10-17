@@ -36,7 +36,6 @@ export const login = async (email, password) => {
   try {
     const user = await signInWithEmailAndPassword(auth, email, password);
     alert("User logged-in successfully!");
-    console.log(user);
   } catch (error) {
     alert(error.message);
   }

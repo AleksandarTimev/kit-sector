@@ -65,3 +65,15 @@ Cypress.Commands.add("containsInOuterHtml", { prevSubject: true }, (subject, tex
     expect(outerHtml).to.include(text);
   });
 });
+
+Cypress.Commands.add("logoutCommand", () => {
+  cy.dataCy("cy-logout")
+  .trigger("mouseover")
+  .should("have.css", "color", "rgba(0, 0, 0, 0.5)")
+  .click();
+
+cy.wait(2000);
+
+cy.dataCy("cy-login-btn").should("be.visible");
+cy.dataCy("cy-register-btn").should("be.visible");
+});

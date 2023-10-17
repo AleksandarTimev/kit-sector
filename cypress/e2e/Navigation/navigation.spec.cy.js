@@ -18,6 +18,8 @@ describe("Navigation Page", () => {
   ];
 
   beforeEach(() => {
+    cy.clearCookies();
+    cy.clearLocalStorage();
     cy.visit("/");
   });
 
@@ -55,7 +57,7 @@ describe("Navigation Page", () => {
         cy.get(linkSelector)
           .contains(linkText)
           .trigger("mouseover")
-          .should("have.css", "background-color", "rgb(245, 215, 215)")
+          .should("have.css", "background-color", "rgb(245, 215, 215)");
       } else {
         cy.get(linkSelector)
           .contains(linkText)
@@ -67,14 +69,6 @@ describe("Navigation Page", () => {
   });
 
   it("User is able to log out", () => {
-    cy.dataCy("cy-logout")
-      .trigger("mouseover")
-      .should("have.css", "color", "rgba(0, 0, 0, 0.5)")
-      .click();
-
-    cy.wait(2000);
-
-    cy.dataCy("cy-login-btn").should("be.visible");
-    cy.dataCy("cy-register-btn").should("be.visible");
+    cy.logoutCommand();
   });
 });
