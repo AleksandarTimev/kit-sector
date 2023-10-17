@@ -51,7 +51,7 @@ describe("Profile Actions", () => {
   it("User able to see new kit in user profile", () => {
     cy.visit("/profile");
 
-    const currentKitName = Cypress.env("currentKitName");
+    let currentKitName = Cypress.env("currentKitName");
     lastVisitedUrl = "/catalog";
     cy.get(`li.kit-details.li-catalog:contains('${currentKitName}')`)
       .find(".kit-buttons [data-cy='cy-details-button-profile']")
@@ -63,10 +63,10 @@ describe("Profile Actions", () => {
       .contains(currentKitName);
   });
 
-  it("User able to delete the kit from profile page", () => {
+  it("User able to edit the kit", () => {
     cy.visit(lastVisitedUrl);
 
-    const currentKitName = Cypress.env("currentKitName");
+    let currentKitName = Cypress.env("currentKitName");
 
     cy.get(`li.kit-details.li-catalog:contains('${currentKitName}')`)
       .find(".kit-buttons [data-cy='cy-details-button']")
@@ -78,6 +78,40 @@ describe("Profile Actions", () => {
 
     cy.get(".container .kit-buttons [data-cy='cy-edit-btn']").click();
 
-    cy.url().should("include", "/catalog");
+    cy.wait(2500);
+
+    cy.dataCy("cy-edit-name").clear().type("Newcastle Away 2023");
+
+    currentKitName = "Newcastle Away 2023";
+    Cypress.env("currentKitName", currentKitName);
+
+    cy.dataCy("cy-edit-description").clear().type("Edited description");
+    cy.dataCy("cy-edit-image").selectFile("cypress/fixtures/nufc_away.png");
+
+    cy.dataCy("cy-edit-btn").should("be.visible").contains("Save").click();
+    cy.wait(5000);
+    cy.get(".container .li-catalog h1")
+      .should("be.visible")
+      .contains(currentKitName);
+  });
+
+  it("user able to delete kit", () => {
+    it("User able to delete the kit from profile page", () => {
+      cy.visit(lastVisitedUrl);
+  
+      const currentKitName = Cypress.env("currentKitName");
+  
+      cy.get(`li.kit-details.li-catalog:contains('${currentKitName}')`)
+        .find(".kit-buttons [data-cy='cy-details-button']")
+        .click();
+  
+      cy.get(".container .li-catalog h1")
+        .should("be.visible")
+        .contains(currentKitName);
+  
+      cy.get(".container .kit-buttons [data-cy='cy-delete-btn']").click();
+  
+      cy.url().should("include", "/catalog");
+    });
   });
 });

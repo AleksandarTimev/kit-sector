@@ -45,7 +45,7 @@ Cypress.Commands.add("loginCommand", () => {
   cy.dataCy("cy-submit-login").should("be.visible").contains("Login").click();
 
   cy.get("body").type("{enter}");
-  
+
   cy.wait(3000);
 });
 
@@ -59,21 +59,39 @@ Cypress.Commands.add("homePageLanding", () => {
 });
 
 //Custom command for checking text in outer HTML tag
-Cypress.Commands.add("containsInOuterHtml", { prevSubject: true }, (subject, text) => {
-  cy.wrap(subject).parent().should(($parent) => {
-    const outerHtml = $parent[0].outerHTML;
-    expect(outerHtml).to.include(text);
-  });
-});
+Cypress.Commands.add(
+  "containsInOuterHtml",
+  { prevSubject: true },
+  (subject, text) => {
+    cy.wrap(subject)
+      .parent()
+      .should(($parent) => {
+        const outerHtml = $parent[0].outerHTML;
+        expect(outerHtml).to.include(text);
+      });
+  }
+);
 
 Cypress.Commands.add("logoutCommand", () => {
   cy.dataCy("cy-logout")
-  .trigger("mouseover")
-  .should("have.css", "color", "rgba(0, 0, 0, 0.5)")
-  .click();
+    .trigger("mouseover")
+    .should("have.css", "color", "rgba(0, 0, 0, 0.5)")
+    .click();
 
-cy.wait(2000);
+  cy.wait(2000);
 
-cy.dataCy("cy-login-btn").should("be.visible");
-cy.dataCy("cy-register-btn").should("be.visible");
+  cy.dataCy("cy-login-btn").should("be.visible");
+  cy.dataCy("cy-register-btn").should("be.visible");
 });
+
+// Cypress.Commands.add("deleteKit", () => {
+//   cy.find(".kit-buttons [data-cy='cy-details-button']")
+//     .click();
+
+//   cy.get(".container .li-catalog h1")
+//     .should("be.visible")
+
+//   cy.get(".container .kit-buttons [data-cy='cy-delete-btn']").click();
+
+//   cy.url().should("include", "/catalog");
+// });

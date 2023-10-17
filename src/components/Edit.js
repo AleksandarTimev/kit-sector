@@ -70,6 +70,7 @@ export const EditForm = () => {
           type="text"
           id="name"
           className="form-control"
+          data-cy="cy-edit-name"
           placeholder="Real Madrid Home 19/20"
           value={name}
           onChange={(event) => kitService.handleNameChange(event, setName)}
@@ -84,6 +85,7 @@ export const EditForm = () => {
           type="text"
           id="description"
           className="form-control"
+          data-cy="cy-edit-description"
           placeholder="Description here..."
           value={description}
           onChange={(event) =>
@@ -130,11 +132,12 @@ export const EditForm = () => {
           type="file"
           id="image"
           className="form-control"
+          data-cy="cy-edit-image"
           onChange={(event) => kitService.handleImageChange(event, setImage)}
           required
         />
       </div>
-      <button type="submit" className="btn btn-primary register">
+      <button type="submit" className="btn btn-primary register" data-cy="cy-edit-btn">
         Save
       </button>
     </form>
