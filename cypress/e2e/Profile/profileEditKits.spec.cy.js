@@ -31,7 +31,7 @@ describe("Profile Actions", () => {
     cy.dataCy("cy-upload-image").selectFile("cypress/fixtures/nufc_home.jpg");
     cy.dataCy("cy-upload-btn").should("be.visible").contains("Upload").click();
 
-    cy.wait(2000);
+    cy.wait(3000);
 
     cy.url().should("include", "/catalog");
 
@@ -76,6 +76,11 @@ describe("Profile Actions", () => {
       .should("be.visible")
       .contains(currentKitName);
 
+    cy.url().then((url) => {
+      lastVisitedUrl = url;
+      cy.log("lastVisitedUrl set to:", lastVisitedUrl);
+    });
+
     cy.get(".container .kit-buttons [data-cy='cy-edit-btn']").click();
 
     cy.wait(2500);
@@ -89,29 +94,24 @@ describe("Profile Actions", () => {
     cy.dataCy("cy-edit-image").selectFile("cypress/fixtures/nufc_away.png");
 
     cy.dataCy("cy-edit-btn").should("be.visible").contains("Save").click();
-    cy.wait(5000);
+
+    cy.wait(7000);
+
     cy.get(".container .li-catalog h1")
       .should("be.visible")
       .contains(currentKitName);
   });
 
-  it("user able to delete kit", () => {
-    it("User able to delete the kit from profile page", () => {
-      cy.visit(lastVisitedUrl);
-  
-      const currentKitName = Cypress.env("currentKitName");
-  
-      cy.get(`li.kit-details.li-catalog:contains('${currentKitName}')`)
-        .find(".kit-buttons [data-cy='cy-details-button']")
-        .click();
-  
-      cy.get(".container .li-catalog h1")
-        .should("be.visible")
-        .contains(currentKitName);
-  
-      cy.get(".container .kit-buttons [data-cy='cy-delete-btn']").click();
-  
-      cy.url().should("include", "/catalog");
-    });
+  it("User able to delete the kit from profile page", () => {
+    cy.visit(lastVisitedUrl);
+
+    const currentKitName = Cypress.env("currentKitName");
+    cy.get(".container .li-catalog h1")
+      .should("be.visible")
+      .contains(currentKitName);
+
+    cy.get(".container .kit-buttons [data-cy='cy-delete-btn']").click();
+
+    cy.url().should("include", "/catalog");
   });
 });
