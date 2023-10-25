@@ -65,7 +65,7 @@ export function Cart() {
         {loading ? (
           <p>Loading...</p>
         ) : cart.length === 0 ? (
-          <p>Your cart is empty!</p>
+          <p data-cy="cy-cart-empty">Your cart is empty!</p>
         ) : (
           <table>
             <thead>
@@ -81,17 +81,26 @@ export function Cart() {
               {cart.map((kit) => (
                 <tr key={kit.id}>
                   <td>
-                    <Link className="row-cart" to={`/details/${kit.id}`}>
+                    <Link
+                      className="row-cart"
+                      data-cy="cy-cart-name"
+                      to={`/details/${kit.id}`}
+                    >
                       {kit.name}
                     </Link>
                   </td>
-                  <td className="row-cart">{kit.description}</td>
-                  <td className="row-cart">${kit.price}</td>
+                  <td className="row-cart" data-cy="cy-cart-description">
+                    {kit.description}
+                  </td>
+                  <td className="row-cart" data-cy="cy-cart-price">
+                    ${kit.price}
+                  </td>
                   <td className="row-cart">
                     <img
                       className="img-cart"
                       src={kit.imageUrl}
                       alt={kit.name}
+                      data-cy="cy-cart-img"
                     />
                   </td>
                   <td>
@@ -118,6 +127,7 @@ export function Cart() {
         {cart.length === 0 ? null : (
           <button
             className="btn"
+            data-cy="cy-cart-checkout"
             onClick={() => cartService.orderHandled(user, setCart)}
           >
             Checkout
