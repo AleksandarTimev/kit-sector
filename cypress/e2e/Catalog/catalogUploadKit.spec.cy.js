@@ -1,4 +1,4 @@
-describe("Catalog Actions", () => {
+describe("Catalog Actions - Upload Kit", () => {
   const timestamp = new Date().getTime();
   const kitName = `Newcastle Home Kit ${timestamp}`;
   const desc = "Lorem ipsum dolor sit amet con el met dolor";
