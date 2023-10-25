@@ -1,4 +1,4 @@
-describe("Catalog Actions", () => {
+describe("Cart Actions - Add single kit", () => {
 
   it("User able to login", () => {
     cy.loginCommand();
