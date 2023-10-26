@@ -5,12 +5,13 @@ export const Contacts = () => {
   return (
     <div className='container'>
     <div>
-        <h1 className="contact-us">Contact Us</h1>
+        <h1 className="contact-us" data-cy="cy-contact">Contact Us</h1>
       <div className="container">
         <div className="wrapper-contacts">
-        <div className="map-container">
+        <div className="map-container" data-cy="cy-contact-map-container">
           <iframe
             title="OpenStreetMap"
+            data-cy="cy-contact-iframe"
             width="700"
             height="550"
             style={{ border: 0 }}
