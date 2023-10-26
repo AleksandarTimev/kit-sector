@@ -84,6 +84,13 @@ Cypress.Commands.add("logoutCommand", () => {
   cy.dataCy("cy-register-btn").should("be.visible");
 });
 
+Cypress.Commands.add("getIframe", () => {
+  return cy
+    .dataCy("cy-contact-iframe")
+    // .its("0.contentDocument.body")
+    .should("not.be.empty")
+    .then(cy.wrap);
+});
 // Cypress.Commands.add("deleteKit", () => {
 //   cy.find(".kit-buttons [data-cy='cy-details-button']")
 //     .click();

@@ -14,6 +14,7 @@ module.exports = defineConfig({
     devServer: {
       framework: "create-react-app",
       bundler: "webpack",
+      "chromeWebSecurity": false
     },
   },
 });
