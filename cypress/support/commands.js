@@ -24,6 +24,8 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+import 'cypress-iframe';
+
 // Custom commands to get an element using the data-cy attribute
 Cypress.Commands.add("dataCy", (value) => {
   return cy.get(`[data-cy=${value}]`);
@@ -86,11 +88,12 @@ Cypress.Commands.add("logoutCommand", () => {
 
 Cypress.Commands.add("getIframe", () => {
   return cy
-    .dataCy("cy-contact-iframe")
-    // .its("0.contentDocument.body")
-    .should("not.be.empty")
+    .get('[data-cy=cy-contact-iframe]')
+    .should("be.visible")
+    .iframe()
     .then(cy.wrap);
 });
+
 // Cypress.Commands.add("deleteKit", () => {
 //   cy.find(".kit-buttons [data-cy='cy-details-button']")
 //     .click();

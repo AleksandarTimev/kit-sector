@@ -15,10 +15,10 @@ describe("Contact Page - Map Actions", () => {
     cy.dataCy("cy-contact-iframe").should("be.visible");
   });
 
-  it("User able to zoom in and zoom out on map", () => {
+  it("User able to zoom in on the map", () => {
     cy.visit("/contact");
-
-    cy.getIframe().get('a.leaflet-control-zoom-in').click();
-    // cy.get('[data-cy=cy-contact-iframe]').iframe().find('a.leaflet-control-zoom-out').click();
+  
+    cy.getIframe().find('a.leaflet-control-zoom-in').click();
   });
+  
 });
